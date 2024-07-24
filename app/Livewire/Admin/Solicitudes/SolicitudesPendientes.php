@@ -43,9 +43,15 @@ class SolicitudesPendientes extends Component
         if ($this->fecha != null){
             $solicitudes = Solicitud::where('estado_id', 1)
                                     ->where('fecha', $this->fecha)
+                                    ->whereHas('user', function($query) {
+                                        $query->whereNull('deleted_at');
+                                    })
                                     ->with('estado')->with('tipo_aula')->with('aula')->get();
         }else {
             $solicitudes = Solicitud::where('estado_id', 1)
+                                    ->whereHas('user', function($query) {
+                                        $query->whereNull('deleted_at');
+                                    })
                                     ->with('estado')->with('tipo_aula')->with('aula')->get();
         }
         return view('livewire.admin.solicitudes.solicitudes-pendientes',['solicitudes' => $solicitudes]);

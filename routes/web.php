@@ -46,6 +46,7 @@ Route::view('/docentes/registrar', "vistas.admin.docentes.registrar")->middlewar
 Route::view('/roles', "vistas.admin.general.roles")->middleware('auth')->name('roles');
 Route::view('/aulas', "vistas.admin.general.aulas")->middleware('auth')->name('aulas');
 Route::view('/periodos', "vistas.admin.general.periodos")->middleware('auth')->name('periodos');
+Route::view('/clases', "vistas.admin.general.clases")->middleware('auth')->name('clases');
 
 //Módulo de solicitudes
 Route::view('/solicitudes/crear', "vistas.docente.solicitudes.crear")->middleware('auth')->name('solicitudes-crear');

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Aula;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use PhpParser\Node\Expr\Assign;
@@ -52,5 +53,21 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'empleado_id' => 1
         ])->assignRole($role2);
+
+        User::create([
+            'nombre' => 'Jaime David',
+            'apellido' => 'Luna Ponce',
+            'name' => 'Prueba',
+            'email' => 'prueba@gmail.com',
+            'password' => Hash::make('12345678'),
+            'empleado_id' => 1
+        ])->assignRole($role2);
+
+        Aula::create([
+            'nombre' => 'Aula 1',
+            'capacidad' => '30',
+            'disponible' => 'Disponible',
+            'observacion' => 'ninguna'
+        ]);
     }
 }

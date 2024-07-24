@@ -21,6 +21,7 @@ class Solicitud extends ModelBase
         'aula_id',
         'tipo_aula_id',
         'estado_id',
+        'user_id',
     ];
 
     public function aula()
@@ -36,5 +37,10 @@ class Solicitud extends ModelBase
     public function estado()
     {
         return $this->belongsTo(EstadoSolicitud::class, 'estado_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

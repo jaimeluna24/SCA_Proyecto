@@ -23,6 +23,7 @@ class Crear extends Component
     public $alertWarning = false;
     public $error = false;
     public $requerir_link = false;
+    public $user_id;
 
 
     public function changeHora()
@@ -140,6 +141,7 @@ class Crear extends Component
                 $solicitud->tipo_aula_id = $tipoAula->id;
                 $solicitud->estado_id = 1;
                 $solicitud->aula_id = $aula->id;
+                $solicitud->user_id = auth()->user()->id;
 
                 $solicitud->save();
                 toastr()->success('Solicitud creada exitosamente', 'Éxito', ['timeOut' => 5000]);

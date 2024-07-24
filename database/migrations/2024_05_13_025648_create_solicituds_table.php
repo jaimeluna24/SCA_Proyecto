@@ -25,6 +25,8 @@ return new class extends Migration
             $table->foreign('tipo_aula_id')->references('id')->on('tipo_aulas')->onDelete('cascade');
             $table->unsignedBigInteger('estado_id');
             $table->foreign('estado_id')->references('id')->on('estado_solicituds')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer("created_by");
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();

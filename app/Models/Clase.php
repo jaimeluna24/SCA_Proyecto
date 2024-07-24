@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Periodo extends ModelBase
+class Clase extends ModelBase
 {
-    use HasFactory;
     use SoftDeletes;
+    use HasFactory;
 }

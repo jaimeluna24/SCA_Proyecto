@@ -333,16 +333,16 @@
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Agendas</span></a>
               <ul class="dropdown-menu">
                 @role('Docente')
-                <li><a class="nav-link" href="">Programar Agendas</a></li>
+                <li><a class="nav-link" href="">Programar Horarios</a></li>
                 @endrole
                 @role('Administrador')
                 <li><a class="nav-link" href="">Agendas Programadas</a></li>
                 @endrole
                 <li><a class="nav-link" href="">Mis Agendas Programadas</a></li>
                 @role('Administrador')
-                <li><a class="nav-link" href="">Historial de Agendas</a></li>
+                <li><a class="nav-link" href="">Historial de Horarios</a></li>
                 @endrole
-                <li><a class="nav-link" href="">Mi Historial de Agendas</a></li>
+                <li><a class="nav-link" href="">Mi Historial de Horarios</a></li>
 
               </ul>
             </li>
@@ -361,9 +361,9 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Historiales</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="">Mi Historial de Asistencias</a></li>
-                    <li><a class="nav-link" href="">Mi Historial de Agendas</a></li>
+                    <li><a class="nav-link" href="">Mi Historial de Horarios</a></li>
                     @role('Administrador')
-                    <li><a class="nav-link" href="">Historial de Agendas</a></li>
+                    <li><a class="nav-link" href="">Historial de Horarios</a></li>
                     <li><a class="nav-link" href="">Historial General de Asistencias</a></li>
                     @endrole
                 </ul>
@@ -402,6 +402,8 @@
                     <li><a class="nav-link" href="{{ route('roles') }}">Roles</a></li>
                     <li><a class="nav-link" href="{{ route('aulas') }}">Aulas</a></li>
                     <li><a class="nav-link" href="{{ route('periodos') }}">Periodos</a></li>
+                    <li><a class="nav-link" href="{{ route('clases') }}">Clases</a></li>
+
                   </ul>
                 </li>
                 @endrole

@@ -57,11 +57,20 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+     <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+      </script>
 
 </head>
 <body class="bg-gray-100 dark:bg-gray-800">
 
-
+    <div class="div-loader" id="loader">
+        <div class="loader"></div>
+    </div>
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
@@ -242,14 +251,12 @@
             </button>
             <ul id="dropdown-example5" class="hidden py-2 space-y-2">
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Lista de Docentes</a>
                  </li>
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registrar Docente</a>
                  </li>
-                 <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
-                 </li>
+
             </ul>
           </li>
           <li class="border-b-2 dark:border-gray-800">
@@ -262,14 +269,12 @@
             </button>
             <ul id="dropdown-example6" class="hidden py-2 space-y-2">
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                    <a href="{{ route('empleados') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Lista de Empleados</a>
                  </li>
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                    <a href="{{ route('empleados-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registrar Empleado</a>
                  </li>
-                 <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
-                 </li>
+
             </ul>
           </li>
           <li class="border-b-2 dark:border-gray-800">
@@ -371,6 +376,21 @@ themeToggleBtn.addEventListener('click', function() {
 });
 
 </script>
+<script>
+    // $(function(){
+    //     setTimeout(() => {
+    //         $(".div-loader").fadeOut(100)
+    //     },500);
+    // })
+
+    window.addEventListener('load', function() {
+    // Obtiene el elemento del loader
+    var loader = document.getElementById('loader');
+
+    // Oculta el loader estableciendo la propiedad CSS 'display' a 'none'
+    loader.style.display = 'none';
+});
+  </script>
 </body>
 </html>
 

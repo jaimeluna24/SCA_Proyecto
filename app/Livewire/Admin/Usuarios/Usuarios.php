@@ -20,6 +20,9 @@ class Usuarios extends Component
     public $role_id;
     public $username;
     public $rolActual;
+    public $estado;
+    public $modeChangeEstado = false;
+
 
     public function render()
     {
@@ -38,12 +41,13 @@ class Usuarios extends Component
     public function modeList(){
         $this->deshabilitar = false;
         $this->changeRole = false;
+        $this->modeChangeEstado = false;
     }
 
     public function eliminarUsuario(){
         if($this->user){
             $this->user->delete();
-            toastr()->warning('Usuario deshabilitado éxitosamente', 'Atención', ['timeOut' => 6000]);
+            toastr()->warning('Usuario eliminado éxitosamente', 'Atención', ['timeOut' => 6000]);
             $this->deshabilitar = false;
         }
     }
@@ -58,11 +62,30 @@ class Usuarios extends Component
 
     public function cambiarRole(){
         if($this->user){
-            $role = Role::where('name', $this->rolActual)->first();
-            $this->user->syncRoles([$role->id]);
-            if($this->user->syncRoles([$role->id])){
+            $role = Role::find($this->role_id);
+            if($role){
+                $this->user->syncRoles([$role->name]);
                 $this->changeRole = false;
             }
+
+        }
+    }
+
+    public function modeEstado($id){
+        $this->user = User::find($id);
+        $this->username = $this->user->name;
+        $this->estado = $this->user->active;
+        $this->modeChangeEstado = true;
+    }
+
+    public function changeEstado(){
+        if($this->estado == 1){
+            $this->user->update(['active' => 0]);
+            $this->modeChangeEstado = false;
+
+        }else{
+            $this->user->update(['active' => 1]);
+            $this->modeChangeEstado = false;
         }
     }
 

@@ -69,4 +69,50 @@ class Empleados extends Component
         $this->detail = false;
         $this->isEditMode = true;
     }
+
+    public function rules()
+    {
+        return [
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'identidad' => ['required', 'size:15', 'regex:/^\d{4}-\d{4}-\d{5}$/'],
+            'cod_empleado' => 'required',
+            'email' => 'required',
+            'telefono' => ['required', 'size:9', 'regex:/^\d{4}-\d{4}$/'],
+            'fecha_nacimiento' => 'before:today'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'identidad.unique' => 'La identidad pertenece a otro empleado.',
+            'identidad.size' => 'La identidad debe ser de 15 caracteres.',
+            'identidad.regex' => 'Formato esperado: "0000-0000-00000"',
+            'cod_empleado.unique' => 'El código ya esta en uso',
+            'email.unique' => 'El email ya esta en uso',
+            'telefono.unique' => 'El telefono ya pertenece a un empleado',
+            'telefono.size' => 'El telefono debe tener 9 caracteres',
+            'telefono.regex' => 'Formato esperado: "1234-5678"',
+            'fecha_nacimiento.before' => 'La fecha debe ser menor a la actual'
+        ];
+    }
+
+    public function editar(){
+        $this->validate();
+        if($this->empeladoObjetc){
+            $this->empeladoObjetc->update([
+                'nombre' => $this->nombre,
+                'apellido' => $this->apellido,
+                'identidad' => $this->identidad,
+                'cod_empleado' => $this->cod_empleado,
+                'telefono' => $this->telefono,
+                'estado_civil' => $this->estado_civil,
+                'email' => $this->email,
+                'fecha_nacimiento' => $this->fecha_nacimiento,
+            ]);
+            toastr()->success('Empleado actualizado exitosamente', 'Éxito', ['timeOut' => 5000]);
+            $this->isEditMode = false;
+        }
+    }
 }

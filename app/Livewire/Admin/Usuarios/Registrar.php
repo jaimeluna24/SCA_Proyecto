@@ -19,7 +19,7 @@ class Registrar extends Component
     public function rules()
     {
         return [
-            'name' => 'required|min:8|unique:users,name',
+            'name' => 'required|min:4|unique:users,name',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:8'
         ];

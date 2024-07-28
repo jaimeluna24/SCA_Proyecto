@@ -12,7 +12,7 @@ class Registrar extends Component
 {
     public $nombre;
     public $apellido;
-    public $identidad, $email, $telefono, $fecha_nacimiento, $sede, $empleado;
+    public $identidad, $email, $telefono, $fecha_nacimiento, $sede_id, $empleado_id;
     public $error = false;
     public $errorE = false;
     public $errorEx = false;
@@ -28,34 +28,33 @@ class Registrar extends Component
     public function rules()
     {
         return [
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'identidad' => ['required', 'regex:/^\d{4}-\d{4}-\d{5}$/', 'unique:docentes,identidad'],
-            'email' => 'required|unique:empleados,email',
-            'telefono' => ['required', 'regex:/^\d{4}-\d{4}$/', 'unique:docentes,telefono'],
-            'fecha_nacimiento' => 'before:today'
+            'empleado_id' => 'required',
+            'sede_id' => 'required',
+            'email' => 'required|unique:docentes,email',
+
         ];
     }
 
     public function messages()
     {
         return [
-            'identidad.unique' => 'La identidad pertenece a otro empleado.',
-            'identidad.regex' => 'Formato esperado: "0000-0000-00000"',
+            'empleado_id' => 'Campo requerido',
+            'sede_id' => 'Campo requerido',
             'email.unique' => 'El email ya esta en uso',
-            'telefono.unique' => 'El telefono ya pertenece a un empleado',
-            'telefono.regex' => 'Formato esperado: "1234-5678"',
-            'fecha_nacimiento.before' => 'La fecha debe ser menor a la actual'
         ];
     }
 
     public function register()
     {
         try{
-            $sede = sede::where('nombre', $this->sede)->first();
-            $empleado = Empleado::whereRaw("CONCAT(nombre, ' ', apellido) LIKE '%$this->empleado%'")->first();
+            $sede = sede::where('id', $this->sede_id)->first();
+            $empleado = Empleado::where('id', $this->empleado_id)->first();
             $this->nombre = $empleado->nombre;
             $this->apellido = $empleado->apellido;
+            $this->identidad = $empleado->identidad;
+            $this->telefono = $empleado->telefono;
+            $this->fecha_nacimiento = $empleado->fecha_nacimiento;
+
             $docent = Docente::where('empleado_id', $empleado->id)->first();
 
             $this->validate();
@@ -71,8 +70,8 @@ class Registrar extends Component
                         $docente->email = $this->email;
                         $docente->telefono = $this->telefono;
                         $docente->fecha_nacimiento = $this->fecha_nacimiento;
-                        $docente->sede_id = $sede->id;
-                        $docente->empleado_id = $empleado->id;
+                        $docente->sede_id = $this->sede_id;
+                        $docente->empleado_id = $this->empleado_id;
 
                         $docente->save();
                         toastr()->success('Docente creado exitosamente', 'Éxito', ['timeOut' => 5000]);

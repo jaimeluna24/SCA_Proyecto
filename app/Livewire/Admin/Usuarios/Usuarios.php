@@ -82,10 +82,14 @@ class Usuarios extends Component
         if($this->estado == 1){
             $this->user->update(['active' => 0]);
             $this->modeChangeEstado = false;
+            toastr()->warning('Usuario inactivado exitosamente', 'Éxito', ['timeOut' => 5000]);
+
 
         }else{
             $this->user->update(['active' => 1]);
             $this->modeChangeEstado = false;
+            toastr()->warning('Usuario activado exitosamente', 'Éxito', ['timeOut' => 5000]);
+
         }
     }
 

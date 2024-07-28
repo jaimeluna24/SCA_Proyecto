@@ -2,88 +2,67 @@
     {{-- <div class="card-header">
       <h4>Horizontal Form</h4>
     </div> --}}
-    <form wire:submit.prevent="register()">
-        <div class="card-body">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputEmail4">Nombres</label>
-                  <input wire:model.live="nombre" type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}" id="nombre" placeholder="Nombres" required>
-                  <div class="errors">@error('apellido') {{ $message }} @enderror</div>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">Apellidos</label>
-                  <input wire:model.live="apellido" type="text" class="form-control {{ $errors->has('apellido') ? ' is-invalid' : '' }}" id="apellido" placeholder="Apellidos" required/>
-                  <div class="errors">@error('apellido') {{ $message }} @enderror</div>
-                </div>
-              </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for="inputCity">Identidad</label>
-                  <input wire:model="identidad" type="text" class="form-control {{ $errors->has('identidad') ? ' is-invalid' : '' }}" id="inputCity" required/>
-                  <div class="errors">@error('identidad') {{ $message }} @enderror</div>
-                </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputCity">Codigo de Empleado</label>
-                    <input wire:model="cod_empleado" type="text" class="form-control {{ $errors->has('cod_empleado') ? ' is-invalid' : '' }}" id="inputCity" required/>
-                    <div class="errors">@error('cod_empleado') {{ $message }} @enderror</div>
-                  </div>
 
-                <div class="form-group col-md-4">
-                    <label for="inputCity">Teléfono</label>
-                    <input wire:model="telefono" type="text" class="form-control {{ $errors->has('telefono') ? ' is-invalid' : '' }}" id="inputCity" required/>
-                    <div class="errors">@error('telefono') {{ $message }} @enderror</div>
-                </div>
-              </div>
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <label for="inputEmail4">Email</label>
-              <input wire:model="email" type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" id="inputEmail4" required/>
-              <div class="errors">@error('email') {{ $message }} @enderror</div>
+    <form wire:submit.prevent="register()" class="w-10/12 mx-auto mt-8">
+
+        <div class="grid md:grid-cols-3 md:gap-6 md:mb-6">
+            <div class="relative z-0 mb-5">
+                <input wire:model="nombre" type="text" id="floating_standard" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+                <label for="floating_standard" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Nombres</label>
+                <div class="errors">@error('nombre') {{ $message }} @enderror</div>
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputCity">Fecha de Nacimiento</label>
-                <input wire:model="fecha_nacimiento" type="date" class="form-control datepicker {{ $errors->has('fecha_nacimiento') ? ' is-invalid' : '' }}" id="inputCity" required/>
-                <div class="errors">@error('fecha_nacimiento') {{ $message }} @enderror</div>
-              </div>
-
-              <div class="form-group col-md-4">
-                <div wire:ignore>
-                    <label>Estado Civil</label>
-                    <select wire:model="estado_civil" class="form-control" aria-placeholder="Seleccione" required/>
-                        <option>Seleccione</option>
-                        <option>Soltero</option>
-                        <option>Casado</option>
-                    </select>
-                </div>
-
-                @if($error)
-                <div class="errors">ha ocurrido un error</div>
-                @endif
-              </div>
-            {{-- <div class="form-group col-md-6">
-              <label for="inputPassword4">Contraseña</label>
-              <input wire:model="password" type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" id="inputPassword4" required/>
-              <div class="errors">@error('password') {{ $message }} @enderror</div>
-            </div> --}}
-          </div>
+            <div class="relative z-0 mb-5">
+                <input wire:model="apellido" type="text" id="floating_standard" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+                <label for="floating_standard" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Apellidos</label>
+                <div class="errors">@error('apellido') {{ $message }} @enderror</div>
+            </div>
+            <div class="relative z-0 mb-5">
+                <input wire:model="identidad"  type="text" id="floating_standard" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "   />
+                <label for="floating_standard" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">N. Identidad</label>
+                <div class="errors">@error('identidad') {{ $message }} @enderror</div>
+            </div>
 
         </div>
-        <div class="card-footer" align="right">
-        <a href="/empleados" class="btn btn-secondary">Cancelar</a>
-          <button class="btn btn-primary" type="submit">Registrar</button>
+        <div class="grid md:grid-cols-3 md:gap-6 md:mb-6">
+            <div class="relative z-0 mb-5">
+                <input wire:model="cod_empleado"  type="text" id="floating_standard" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+                <label for="floating_standard" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Cod. Empleado</label>
+                <div class="errors">@error('cod_empleado') {{ $message }} @enderror</div>
+            </div>
+            <div class="relative z-0 mb-5">
+                <input wire:model="telefono"  type="text" id="floating_standard" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+                <label for="floating_standard" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Teléfono</label>
+                <div class="errors">@error('telefono') {{ $message }} @enderror</div>
+            </div>
+            <div class="relative z-0 mb-5">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select wire:model="estado_civil" id="underline_select" class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-white dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option class="dark:text-black" selected>Seleccione el sexo</option>
+                    <option class="dark:text-black" value="Casado">Casado</option>
+                    <option class="dark:text-black" value="Soltero">Soltero</option>
+                </select>
+                <div class="errors">@error('estado_civil') {{ $message }} @enderror</div>
+            </div>
 
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6 md:mb-6">
+            <div class="relative z-0 mb-5">
+                <input wire:model="email"  type="text" id="floating_standard" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+                <label for="floating_standard" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Correo</label>
+                <div class="errors">@error('email') {{ $message }} @enderror</div>
+            </div>
+            <div class="relative z-0 mb-5">
+                <input wire:model="fecha_nacimiento"  type="date" id="floating_standard" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+                <label for="floating_standard" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Fecha de Nacimiento</label>
+                <div class="errors">@error('fecha_nacimiento') {{ $message }} @enderror</div>
+            </div>
+
+
+        </div>
+        <div class="flex mt-7">
+            <button type="submit" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Guardar</button>
+
+            <button wire:click="modeList()" type="button" class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Regresar</button>
         </div>
     </form>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
-    <script>
-    $('#editable-select').on('select.editable-select', function (e) {
-        var estado_civil = $(this).val();
-
-        @this.set('estado_civil', estado_civil)
-        console.log(estado_civil, 'aqui')
-        }).editableSelect();
-    </script>
   </div>

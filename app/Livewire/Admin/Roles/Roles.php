@@ -66,6 +66,7 @@ class Roles extends Component
                 $role->descripcion = $this->descripcion;
 
                 $role->save();
+                $this->create = false;
 
                 toastr()->success('Rol creado exitosamente', 'Éxito', ['timeOut' => 5000]);
 

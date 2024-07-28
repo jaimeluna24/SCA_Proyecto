@@ -9,43 +9,41 @@
     <div class="grid md:grid-cols-3 md:gap-6 md:mb-6">
         <div class="mb-3">
             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de usuario</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+            <input wire:model="name" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
             <div class="errors">@error('name') {{ $message }} @enderror</div>
         </div>
      <div class="w-full mb-3">
-        <div wire:ignore>
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccion un Empleado</label>
-            <select wire:model="empleado" class="w-full" id="editable-select" aria-placeholder="Seleccione" required/>
-                @foreach ($empleados as $item)
-                <option class="dark:text-black" value="{{ $item->id }}">{{ $item->nombre }} {{ $item->apellido }}</option>
-                @endforeach
-            </select>
-            @if($errorEmpleado)
-                <div class="errors"> Empleado ya en uso</div>
-            @endif
-        </div>
+        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el empleado</label>
+        <select wire:model="empleado" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @foreach ($empleados as $item)
+            <option value="{{ $item->nombre . ' ' . $item->apellido }}">{{ $item->nombre }} {{ $item->apellido }}</option>
+            @endforeach
+        </select>
+        @if($errorEmpleado)
+        <div class="errors"> Empleado ya en uso</div>
+        @endif
+
      </div>
      <div class="mb-3">
-        <div wire:ignore >
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el rol</label>
-            <select wir:model="role" id="roles" class="w-full" required/>
-              @foreach ($roles as $item)
-              <option class="dark:text-black" value="{{ $item->id }}">{{ $item->name }}</option>
-              @endforeach
-            </select>
-            <div class="errors">@error('role') {{ $message }} @enderror</div>
-          </div>
+        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el empleado</label>
+        <select wire:model="role" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @foreach ($roles as $item)
+            <option value="{{ $item->name }}">{{ $item->name }}</option>
+            @endforeach
+        </select>
+        <div class="errors">@error('role') {{ $message }} @enderror</div>
+
      </div>
     </div>
     <div class="grid md:grid-cols-2 md:gap-6 mb-6">
         <div class="mb-3">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
-            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
+            <input wire:model="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
             <div class="errors">@error('email') {{ $message }} @enderror</div>
         </div>
      <div class="mb-3">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+        <input wire:model="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
         <div class="errors">@error('password') {{ $message }} @enderror</div>
     </div>
     </div>

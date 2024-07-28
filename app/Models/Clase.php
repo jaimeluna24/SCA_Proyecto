@@ -10,4 +10,26 @@ class Clase extends ModelBase
 {
     use SoftDeletes;
     use HasFactory;
+
+    protected $fillable = [
+        'codigo',
+        'asignatura',
+    ];
+
+    // Relación con carreraClase
+    // public function carreraClase()
+    // {
+    //     return $this->hasMany(CarreraClase::class, 'clase_id');
+    // }
+
+    // Relación con horario
+    // public function horario()
+    // {
+    //     return $this->hasMany(horario::class, 'clase_id');
+    // }
+
+    public function carreras()
+    {
+        return $this->belongsToMany(Carrera::class, 'carrera_clases');
+    }
 }

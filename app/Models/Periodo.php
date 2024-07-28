@@ -10,4 +10,18 @@ class Periodo extends ModelBase
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $fillable = [
+        'nombre',
+        'identificador',
+        'anio',
+        'fecha_inicio',
+        'fecha_final'
+    ];
+
+     // Relación con periodo
+     public function clase()
+     {
+         return $this->hasMany(Periodo::class, 'periodo_id');
+     }
 }

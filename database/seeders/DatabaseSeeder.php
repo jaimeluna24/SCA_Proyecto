@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Aula;
+use App\Models\EstadoAula;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use PhpParser\Node\Expr\Assign;
@@ -30,7 +31,9 @@ class DatabaseSeeder extends Seeder
             SedeSeeder::class,
             EmpleadoSeeder::class,
             DocenteSeeder::class,
-            GeneralSeeder::class
+            GeneralSeeder::class,
+            ClaseSeeder::class,
+            CarreraSeeder::class,
         ]);
 
         $role = Role::find(1);
@@ -63,11 +66,15 @@ class DatabaseSeeder extends Seeder
             'empleado_id' => 1
         ])->assignRole($role2);
 
+        EstadoAula::create([
+            'estado' => 'Disponible'
+        ]);
+
         Aula::create([
             'nombre' => 'Aula 1',
             'capacidad' => '30',
-            'disponible' => 'Disponible',
-            'observacion' => 'ninguna'
+            'observacion' => 'ninguna',
+            'estado_id' => 1
         ]);
     }
 }

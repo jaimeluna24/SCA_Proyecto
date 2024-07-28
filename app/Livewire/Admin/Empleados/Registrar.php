@@ -35,6 +35,13 @@ class Registrar extends Component
     public function messages()
     {
         return [
+            'nombre.required' => 'El campo es requerido',
+            'apellido.required' => 'El campo es requerido',
+            'identidad.required' => 'El campo es requerido',
+            'cod_empleado.required' => 'El campo es requerido',
+            'email.required' => 'El campo es requerido',
+            'telefono.required' => 'El campo es requerido',
+            'fecha_nacimiento.required' => 'El campo es requerido',
             'identidad.unique' => 'La identidad pertenece a otro empleado.',
             'identidad.size' => 'La identidad debe ser de 15 caracteres.',
             'identidad.regex' => 'Formato esperado: "0000-0000-00000"',

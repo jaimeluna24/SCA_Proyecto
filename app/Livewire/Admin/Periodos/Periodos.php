@@ -16,6 +16,10 @@ class Periodos extends Component
     public $fecha_inicio;
     public $fecha_final;
     public $create = false;
+    public $deshabilitar = false;
+    public $modeEditar = false;
+    public $periodo;
+    public $periodoName;
 
     use WithoutUrlPagination;
 
@@ -65,6 +69,18 @@ class Periodos extends Component
         $this->anio = '';
         $this->fecha_inicio = now();
         $this->fecha_final = now();
+        $this->deshabilitar = false;
+        $this->modeEditar = false;
+    }
+
+    public function modeList(){
+        $this->modeEditar = false;
+        $this->nombre = '';
+        $this->identificador = '';
+        $this->anio = '';
+        $this->fecha_inicio = now();
+        $this->fecha_final = now();
+        $this->modeEditar = false;
     }
     public function register()
     {
@@ -103,6 +119,47 @@ class Periodos extends Component
                 toastr()->error('Error en la base de datos, comunicate con el administrador', 'Error', ['timeOut' => 5000]);
 
             }
+        }
+    }
+
+    public function modeDeshabilitar($id){
+        $this->periodo = Periodo::find($id);
+        $this->periodoName = $this->periodo->nombre;
+        $this->deshabilitar = true;
+    }
+
+    public function eliminarPeriodo(){
+        if($this->periodo){
+            $this->periodo->delete();
+            toastr()->warning('Periodo eliminado éxitosamente', 'Atención', ['timeOut' => 6000]);
+            $this->deshabilitar = false;
+        }
+    }
+
+    public function modeEdit($id){
+        $this->periodo = Periodo::find($id);
+        $this->nombre = $this->periodo->nombre;
+        $this->identificador = $this->periodo->identificador;
+        $this->anio = $this->periodo->anio;
+        $this->fecha_inicio = $this->periodo->fecha_inicio;
+        $this->fecha_final = $this->periodo->fecha_final;
+        $this->modeEditar = true;
+    }
+
+    public function edit(){
+        $this->validate();
+
+        if($this->periodo){
+            $this->periodo->update([
+                'nombre' => $this->nombre,
+                'identificador' => $this->identificador,
+                'anio' => $this->anio,
+                'fecha_inicio' => $this->fecha_inicio,
+                'fecha_final' => $this->fecha_final,
+
+            ]);
+            toastr()->success('Periodo actualizado exitosamente', 'Éxito', ['timeOut' => 5000]);
+            $this->modeEditar = false;
         }
     }
 }

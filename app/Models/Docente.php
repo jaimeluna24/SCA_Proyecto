@@ -17,7 +17,8 @@ class Docente extends ModelBase
         'telefono',
         'email',
         'sede_id',
-        'empleado_id'
+        'empleado_id',
+        'active'
     ];
 
     public function sede()

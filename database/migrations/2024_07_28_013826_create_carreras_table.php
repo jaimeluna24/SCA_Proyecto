@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use PhpParser\Node\NullableType;
 
 return new class extends Migration
 {
@@ -12,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('empleados', function (Blueprint $table) {
+        Schema::create('carreras', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('identidad')->unique();
-            $table->string('cod_empleado')->unique();
-            $table->string('telefono')->unique();
-            $table->string('email')->unique();
-            $table->date('fecha_nacimiento');
-            $table->string('estado_civil');
+            $table->string('carrera');
             $table->integer("created_by")->nullable();
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();
@@ -35,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('empleados');
+        Schema::dropIfExists('carreras');
     }
 };

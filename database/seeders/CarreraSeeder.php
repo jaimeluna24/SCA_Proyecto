@@ -57,11 +57,11 @@ class CarreraSeeder extends Seeder
 
         //Gerencia de Negocios
         $carrera = Carrera::find(2);
-        $carrera->clases()->attach([1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+        $carrera->clases()->attach([1,5,6,7,8,9,10,11,12,13,14]);
 
         //Gerencia en Turismo
         $carrera = Carrera::find(3);
-        $carrera->clases()->attach([1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+        $carrera->clases()->attach([1,2,3,4,5,6,7,8,9,10,11]);
 
         //Ingeniería Electrónica
         $carrera = Carrera::find(4);
@@ -69,7 +69,7 @@ class CarreraSeeder extends Seeder
 
         //Ingeniería de la Producción Industrial
         $carrera = Carrera::find(5);
-        $carrera->clases()->attach([1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+        $carrera->clases()->attach([1,2,3,4,5,6,7,8,9]);
 
         //Ingeniería en Sistemas Computacionales
         $carrera = Carrera::find(6);
@@ -77,7 +77,7 @@ class CarreraSeeder extends Seeder
 
         //Psicología
         $carrera = Carrera::find(7);
-        $carrera->clases()->attach([1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+        $carrera->clases()->attach([1,2,3,4]);
     }
 
 

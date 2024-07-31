@@ -83,8 +83,8 @@
      <div class="limiter">
          <div class="container-login100" >
              <div class="wrap-login100" >
-                 <div class="login100-pic js-tilt" data-tilt >
-                     <img src="{{ asset('login-template/images/img-01.png') }}" alt="IMG">
+                 <div class="login100-pic js-tilt" style="padding-top: 50px" data-tilt >
+                     <img src="{{ asset('images/logo-transparente.png') }}" alt="IMG">
                  </div>
 
                  <form class="login100-form validate-form" method="POST" action="{{route('inicia-sesion')}}">

@@ -56,4 +56,8 @@ Route::view('/solicitudes-pendientes', "vistas.admin.solicitudes.solicitudes-pen
 Route::view('/solicitudes/historial', "vistas.admin.solicitudes.historial")->middleware('auth')->name('historial-solicitudes');
 
 
+//Módulo de horarios
+Route::view('/horarios', "vistas.admin.horarios.horarios")->middleware('auth')->name('horarios');
+Route::view('/horarios-registrar', "vistas.admin.horarios.crear")->middleware('auth')->name('horarios-registrar');
+
 

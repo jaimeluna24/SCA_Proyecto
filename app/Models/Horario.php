@@ -12,7 +12,7 @@ class Horario extends ModelBase
     use SoftDeletes;
 
     protected $fillable = [
-        'fecha',
+        'dias',
         'hora_inicio',
         'hora_fin',
         'link',
@@ -53,6 +53,11 @@ class Horario extends ModelBase
     public function usuario()
     {
         return $this->belongsTo(User::class, 'usuario_id');
+    }
+
+    public function asistencias()
+    {
+        return $this->hasMany(Asistencia::class);
     }
 
 }

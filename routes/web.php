@@ -60,4 +60,8 @@ Route::view('/solicitudes/historial', "vistas.admin.solicitudes.historial")->mid
 Route::view('/horarios', "vistas.admin.horarios.horarios")->middleware('auth')->name('horarios');
 Route::view('/horarios-registrar', "vistas.admin.horarios.crear")->middleware('auth')->name('horarios-registrar');
 
+//Módulo de asistencias
+Route::view('/asistencias', "vistas.admin.asistencias.asistencias")->middleware('auth')->name('asistencias');
+Route::view('/asistencias/marcar', "vistas.admin.asistencias.marcar")->middleware('auth')->name('asistencias-marcar');
+
 

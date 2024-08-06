@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Aula;
+use App\Models\EstadoAsistencia;
 use App\Models\EstadoAula;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -40,8 +41,8 @@ class DatabaseSeeder extends Seeder
         $role2 = Role::find(2);
 
         User::create([
-            'nombre' => 'Jaime David',
-            'apellido' => 'Luna Ponce',
+            'nombre' => 'Ernesto Adolfo',
+            'apellido' => 'Vallejo Alvarez',
             'name' => 'Administrador',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
@@ -49,8 +50,8 @@ class DatabaseSeeder extends Seeder
         ])->assignRole($role);
 
         User::create([
-            'nombre' => 'Jaime David',
-            'apellido' => 'Luna Ponce',
+            'nombre' => 'Osman David',
+            'apellido' => 'Rodriguez',
             'name' => 'Docente',
             'email' => 'docente@gmail.com',
             'password' => Hash::make('12345678'),
@@ -58,8 +59,8 @@ class DatabaseSeeder extends Seeder
         ])->assignRole($role2);
 
         User::create([
-            'nombre' => 'Jaime David',
-            'apellido' => 'Luna Ponce',
+            'nombre' => 'Javier Arturo',
+            'apellido' => 'Perez Cardona',
             'name' => 'Prueba',
             'email' => 'prueba@gmail.com',
             'password' => Hash::make('12345678'),
@@ -75,6 +76,19 @@ class DatabaseSeeder extends Seeder
             'capacidad' => '30',
             'observacion' => 'ninguna',
             'estado_id' => 1
+        ]);
+
+        EstadoAsistencia::create([
+            'estado' => 'Pendiente'
+        ]);
+        EstadoAsistencia::create([
+            'estado' => 'Presente'
+        ]);
+        EstadoAsistencia::create([
+            'estado' => 'Ausente'
+        ]);
+        EstadoAsistencia::create([
+            'estado' => 'Falta Justificada'
         ]);
     }
 }

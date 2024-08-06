@@ -31,5 +31,10 @@ class Docente extends ModelBase
         return $this->belongsTo(Empleado::class, 'empleado_id');
     }
 
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class);
+    }
+
 
 }

@@ -14,8 +14,8 @@ class DocenteSeeder extends Seeder
     public function run(): void
     {
         Docente::create([
-            'nombre' => 'Jaime David',
-            'apellido' => 'Luna Ponce',
+            'nombre' => 'Marcos David',
+            'apellido' => 'Gutierrez Lopez',
             'identidad' => '0601-1990-00932',
             'email' => 'docente@gmail.com',
             'telefono' => '1243-6578',

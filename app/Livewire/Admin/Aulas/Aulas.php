@@ -69,6 +69,7 @@ class Aulas extends Component
         $this->estado_id = null;
         $this->observacion = '';
         $this->deshabilitar = false;
+        $this->modeEstado = false;
     }
 
     public function modeList(){

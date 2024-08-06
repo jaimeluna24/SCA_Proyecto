@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('anio');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
+            $table->boolean('active')->default(false);
             $table->integer("created_by")->nullable();
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();

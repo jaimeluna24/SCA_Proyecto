@@ -95,6 +95,44 @@
                     class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancelar</button>
             </div>
         </div>
+        @elseif($modeEstado)
+        <div
+            class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+                Aula: {{ $aulaName }}
+            </h5>
+            <p class="text-sm font-normal text-gray-500 dark:text-gray-400"> ¿Estás seguro de cambiar el estado del aula
+                {{ $aulaName }}?</p>
+            {{-- <p class="text-sm font-normal text-gray-500 dark:text-gray-400"> Se perderan todos los registros adjuntos al
+                aula</p> --}}
+
+                <div class="mb-3">
+                    <label for="countries"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el
+                        estado</label>
+                    <select wire:model="estado_id" id="countries"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Seleccione</option>
+                        @foreach ($estados as $item)
+                            <option value="{{ $item->id }}">{{ $item->estado }}</option>
+                        @endforeach
+                    </select>
+                    <div class="errors">
+                        @error('estado_id')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                </div>
+
+
+            <div class="flex mt-7">
+                <button wire:click="changeEstado()" type="button"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
+
+                <button wire:click="cerrar()" type="button"
+                    class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancelar</button>
+            </div>
+        </div>
     @elseif($modeEditar)
     <div class="border rounded-md p-5 bg-white dark:bg-transparent border-gray-200 dark:border-gray-600">
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
@@ -206,7 +244,7 @@
                     </div>
                     <input wire:model.live="query" type="text" id="table-search"
                         class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Buscar por nombre o apellido">
+                        placeholder="Buscar por Aula">
                 </div>
             </div>
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -241,11 +279,11 @@
                                 @if ($item->estado_id == 1)
                                     <button
                                         class="focus:outline-none text-white bg-gray-900 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-900 dark:focus:ring-gray-900"
-                                        wire:click="modeEstado({{ $item->id }})">Estado</button>
+                                        wire:click="modeChangeEstado({{ $item->id }})">Estado</button>
                                 @else
                                     <button
                                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-800 dark:hover:bg-green-900 dark:focus:ring-green-900"
-                                        wire:click="modeEstado({{ $item->id }})">Estado</button>
+                                        wire:click="modeChangeEstado({{ $item->id }})">Estado</button>
                                 @endif
                                 <button
                                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"

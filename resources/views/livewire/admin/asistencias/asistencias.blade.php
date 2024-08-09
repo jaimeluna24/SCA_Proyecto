@@ -44,10 +44,11 @@
             </div>
             @endif
         </div>
-        <div class="grid md:grid-cols- md:gap-6 md:mb-6">
+        <div class="grid md:grid-cols-2 md:gap-6 md:mb-6">
+
             <div class="relative z-0 mb-5">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="default_size">Subir evidencia</label>
-                <input wire:model="evidencia" class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file">
+                <input capture="environment" wire:model.live="evidencia" class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file">
                 <div class="errors">
                     @error('evidencia')
                         {{ $message }}
@@ -55,7 +56,49 @@
                 </div>
             </div>
 
+            @if ($evidenciaPreview)
+            <div class="mt-2 w-full flex justify-center">
+                <p>Previsualización:</p>
+                <img src="{{ $evidenciaPreview }}" alt="Previsualización" style="max-width: 300px;">
+            </div>
+        @endif
+
+<div>
+
+</div>
+
+
+
         </div>
+
+        {{-- @if ($cameraStarted)
+        <button wire:click="activarCamara()" type="button" class="gap-2 text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="#ffffff" d="M0 6c0-1.1.9-2 2-2h3l2-2h6l2 2h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10 10a5 5 0 1 0 0-10a5 5 0 0 0 0 10m0-2a3 3 0 1 1 0-6a3 3 0 0 1 0 6"/></svg>
+                Por favor activa tu cámara
+            </button>
+        <div> --}}
+
+{{-- <div class="flex justify-center flex-wrap">
+    <video id="video" width="320" height="240" autoplay></video>
+    <div class="w-full flex mt-3 mb-4 justify-end">
+        <button id="capturebutton"
+        class="text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 me-2 mb-2">
+        Capturar Evidencia</button>
+    </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+    <img id="photo" alt="La imagen aparecera aquí">
+</div> --}}
+
+        {{-- </div>
+
+
+    @endif --}}
+
+    <p>
+       aqui {{ $evidencia }}
+    </p>
+
         <div class="flex flex-wrap mt-4">
             <button wire:click="modePresente({{ $asistenciaSelected->id }})" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">Presente</button>
             <button wire:click="modeAusente({{ $asistenciaSelected->id }})" type="button" class="focus:outline-none text-white bg-redd-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Ausente</button>
@@ -297,5 +340,156 @@
 
     </div>
     @endif
+{{-- <script>
+
+        document.addEventListener('livewire:init', function () {
+            Livewire.on('log-message', function () {
+                var streaming = false,
+        video = document.querySelector("#video"),
+        canvas = document.querySelector("#canvas"),
+        photo = document.querySelector("#photo"),
+        capturebutton = document.querySelector("#capturebutton"),
+        width = 320,
+        height = 0;
+
+        if (!video) {
+            console.error("Video element not found!");
+            return;
+        }
+
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            console.error("getUserMedia not supported on your browser!");
+            return;
+        }
+
+        // Usar la cámara trasera
+        var constraints = {
+            video: {
+                facingMode: { exact: "environment" }
+            },
+            audio: false
+        };
+
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function (err) {
+                console.error("An error occurred: " + err);
+            });
+
+        video.addEventListener("canplay", function (ev) {
+            if (!streaming) {
+                height = video.videoHeight / (video.videoWidth / width);
+                if (isNaN(height)) {
+                    height = width / (4 / 3);
+                }
+                video.setAttribute("width", width);
+                video.setAttribute("height", height);
+                canvas.setAttribute("width", width);
+                canvas.setAttribute("height", height);
+                streaming = true;
+            }
+        }, false);
+
+        function takepicture() {
+            if (width && height) {
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext("2d").drawImage(video, 0, 0, width, height);
+                var data = canvas.toDataURL("image/png");
+                photo.setAttribute("src", data);
+                console.log(data)
+                @this.set('evidencia64', data)
+                @this.set('code64', true)
+
+            } else {
+                console.error("Width or height is not set properly.");
+            }
+        }
+
+        capturebutton.addEventListener("click", function (ev) {
+            takepicture();
+            ev.preventDefault();
+        }, false);
+                });
+            });
+</script> --}}
+
+    {{-- <script>
+
+                    document.addEventListener('livewire:init', function () {
+                        Livewire.on('log-message', function () {
+                            var streaming = false,
+                    video = document.querySelector("#video"),
+                    canvas = document.querySelector("#canvas"),
+                    photo = document.querySelector("#photo"),
+                    capturebutton = document.querySelector("#capturebutton"),
+                    width = 320,
+                    height = 0;
+
+                if (!video) {
+                    console.error("Video element not found!");
+                    return;
+                }
+
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    console.error("getUserMedia not supported on your browser!");
+                    return;
+                }
+
+                // Usar la cámara trasera
+                // var constraints = {
+                //     video: {
+                //         facingMode: { exact: "environment" }
+                //     },
+                //     audio: false
+                // };
+
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then(function (stream) {
+                        video.srcObject = stream;
+                        video.play();
+                    })
+                    .catch(function (err) {
+                        console.error("An error occurred: " + err);
+                    });
+
+                video.addEventListener("canplay", function (ev) {
+                    if (!streaming) {
+                        height = video.videoHeight / (video.videoWidth / width);
+                        if (isNaN(height)) {
+                            height = width / (4 / 3);
+                        }
+                        video.setAttribute("width", width);
+                        video.setAttribute("height", height);
+                        canvas.setAttribute("width", width);
+                        canvas.setAttribute("height", height);
+                        streaming = true;
+                    }
+                }, false);
+
+                function takepicture() {
+                    if (width && height) {
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext("2d").drawImage(video, 0, 0, width, height);
+                        var data = canvas.toDataURL("image/png");
+                        photo.setAttribute("src", data);
+                        console.log(data)
+                        Livewire.emit('savePhoto', data);
+                    } else {
+                        console.error("Width or height is not set properly.");
+                    }
+                }
+
+                capturebutton.addEventListener("click", function (ev) {
+                    takepicture();
+                    ev.preventDefault();
+                }, false);
+                        });
+                    });
+    </script> --}}
 
 </div>

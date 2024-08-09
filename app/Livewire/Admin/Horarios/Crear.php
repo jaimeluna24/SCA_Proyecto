@@ -83,6 +83,21 @@ class Crear extends Component
                                                      'clases' => $clases, 'periodos' => $periodos, 'carreras' => $carreras]);
     }
 
+    public function clean(){
+        $this->hora_inicio = '';
+        $this->hora_fin = '';
+        $this->link = '';
+        $this->observacion = '';
+        $this->aula_id = null;
+        $this->tipo_aula_id = null;
+        $this->docente_id = null;
+        $this->clase_id = null;
+        $this->periodo_id = null;
+
+        $this->carrera_id = null;
+        $this->dias = [];
+    }
+
     public function register()
     {
         $this->validate();
@@ -160,7 +175,7 @@ class Crear extends Component
 
             }
             toastr()->success('Horarios registrados con éxito', 'Éxito', ['timeOut' => 5000]);
-
+            $this->clean();
         }
 
 

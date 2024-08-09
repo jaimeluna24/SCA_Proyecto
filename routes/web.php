@@ -19,6 +19,8 @@ use App\Http\Controllers\LoginController;
 // });
 
 Route::view('/', "vistas.admin.dashboard")->middleware('auth')->name('inicio');
+Route::view('/inicio', "vistas.admin.dashboard")->middleware('auth')->name('inicio');
+
 
 //Modulo de Login
 Route::view('/login', "Auth.login")->name('login');
@@ -62,6 +64,6 @@ Route::view('/horarios-registrar', "vistas.admin.horarios.crear")->middleware('a
 
 //Módulo de asistencias
 Route::view('/asistencias', "vistas.admin.asistencias.asistencias")->middleware('auth')->name('asistencias');
-Route::view('/asistencias/marcar', "vistas.admin.asistencias.marcar")->middleware('auth')->name('asistencias-marcar');
+// Route::view('/asistencias/marcar', "vistas.admin.asistencias.marcar")->middleware('auth')->name('asistencias-marcar');
 
 

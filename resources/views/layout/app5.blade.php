@@ -135,7 +135,7 @@
      <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-900">
         <ul class="space-y-2 font-medium">
            <li class="border-b-2 dark:border-gray-800">
-              <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <a href="/inicio" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                  <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                     <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                     <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
@@ -143,6 +143,15 @@
                  <span class="ms-3">Dashboard</span>
               </a>
            </li>
+
+          <li class="border-b-2 dark:border-gray-800">
+            <a href="{{ route('asistencias') }}" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example2" data-collapse-toggle="dropdown-example2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="m34 10l8 8m0-8l-8 8m10 12l-7 8l-4-4"/><path fill="#666666" d="M26 10H4v8h22zm0 20H4v8h22z"/></g></svg>
+                  <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Asistencias</span>
+
+            </a>
+
+          </li>
            <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                 <svg xmlns="http://www.w3.org/2000/svg" width="17.78" height="20" viewBox="0 0 384 432"><path fill="#666666" d="M341 45q18 0 30.5 12.5T384 88v299q0 17-12.5 29.5T341 429H43q-18 0-30.5-12.5T0 387V88q0-18 12.5-30.5T43 45h89q7-19 23.5-30.5T192 3t36.5 11.5T252 45zm-149 0q-9 0-15 6.5t-6 15t6 15t15 6.5t15-6.5t6-15t-6-15t-15-6.5m43 299v-43H85v43zm64-85v-43H85v43zm0-86v-42H85v42z"/></svg>
@@ -153,14 +162,12 @@
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2">
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                    <a href="{{ route('solicitudes-pendientes') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Solicitudes Pendientes</a>
                  </li>
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                    <a href="{{ route('historial-solicitudes') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Historial de Solicitudes</a>
                  </li>
-                 <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
-                 </li>
+
             </ul>
            </li>
           <li class="border-b-2 dark:border-gray-800">
@@ -181,23 +188,6 @@
           </ul>
           </li>
 
-          <li class="border-b-2 dark:border-gray-800">
-            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example2" data-collapse-toggle="dropdown-example2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="m34 10l8 8m0-8l-8 8m10 12l-7 8l-4-4"/><path fill="#666666" d="M26 10H4v8h22zm0 20H4v8h22z"/></g></svg>
-                  <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Asistencias</span>
-                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                  </svg>
-            </button>
-            <ul id="dropdown-example2" class="hidden py-2 space-y-2">
-                 <li>
-                    <a href="{{ route('asistencias') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Asistencias</a>
-                 </li>
-                 <li>
-                    <a href="{{ route('asistencias-marcar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Marcar Asistencias</a>
-                 </li>
-            </ul>
-          </li>
           <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example3" data-collapse-toggle="dropdown-example3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#666666" d="M2 2h2v18h18v2H2zm5 8h10v3H7zm4 5h10v3H11zM6 4h16v4h-2V6H8v2H6z"/></svg>
@@ -304,7 +294,7 @@
             <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-900">
 
                 <div class="flex flex-wrap gap-2 justify-between items-center mx-auto max-w-screen-xl">
-                    <div class="flex gap-3 items-center flex-wrap">
+                    <div class="flex gap-3 items-center justify-center flex-wrap">
                         @yield('header')
 
                         @yield('button')

@@ -19,14 +19,111 @@
                     class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancelar</button>
             </div>
         </div>
-    @elseif($modeEditar)
+        @elseif($modeDetalle)
+        <div class="border rounded-md p-5 bg-white dark:bg-transparent border-gray-200 dark:border-gray-600">
+            <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+                Detalles de Horario
+            </h5>
+
+        <form  class="w-10/12 mx-auto mt-2">
+            <div class="grid md:grid-cols-3 md:gap-6 md:mb-4">
+                <div class="w-full mb-3">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Docente</label>
+                        <input value="{{ $horario->docente->nombre }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+                </div>
+
+                <div class="w-full mb-3">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Clase</label>
+                        <input value="{{ $horario->clase->asignatura }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 md:gap-6 md:mb-4">
+                <div class="w-full mb-3">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo Aula</label>
+                        <input value="{{ $horario->tipo_aula->tipo }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+                </div>
+                <div class="w-full mb-3">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Aula</label>
+                        <input value="{{ $horario->aula->nombre }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+                </div>
+                <div class="w-full mb-3">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Periodo</label>
+                    <input value="{{ $horario->periodo->nombre }} - {{ $horario->periodo->anio }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 md:gap-6 mb-4">
+                <div class="w-full mb-3">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione
+                        los días</label>
+
+                        <input value="{{ $horario->dias }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+
+                </div>
+
+
+                <div>
+                    <label for="start-time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora de
+                        inicio</label>
+                        <input value="{{ $horario->hora_inicio }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+                </div>
+                <div>
+                    <label for="end-time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora de final</label>
+                    <input value="{{ $horario->hora_fin}}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 md:gap-6 mb-4">
+                @if ($tipo_aula_id == 1)
+                    <div>
+                        <label for="message"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>
+                        <textarea wire:model="link" id="message" rows="3"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="" disabled></textarea>
+
+                    </div>
+                @endif
+
+                <div>
+
+                    <label for="message"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observación</label>
+                    <textarea wire:model="observacion" id="message" rows="3"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="" disabled></textarea>
+
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button wire:click.prevent="modeList()"
+                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Cancelar</button>
+
+
+                </div>
+
+        </form>
+
+
+        </div>
+
+    {{-- @elseif($modeEditar)
     <div class="border rounded-md p-5 bg-white dark:bg-transparent border-gray-200 dark:border-gray-600">
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
             Editar Horario
         </h5>
 
     <form wire:submit.prevent="register()" class="w-10/12 mx-auto mt-2">
-        <div class="grid md:grid-cols-3 md:gap-6 md:mb-4">
+        <div class="grid md:grid-cols-2 md:gap-6 md:mb-4">
             <div class="w-full mb-3">
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el
                     docente</label>
@@ -43,37 +140,12 @@
                     @enderror
                 </div>
             </div>
+
             <div class="w-full mb-3">
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione
-                    una carrera</label>
-                <select wire:model.live="carrera_id" id="countries"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Seleccione</option>
-                    @foreach ($carreras as $item)
-                        <option value="{{ $item->id }}">{{ $item->carrera }}</option>
-                    @endforeach
-                </select>
-                <div class="errors">
-                    @error('carrera_id')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-            <div class="w-full mb-3">
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione
-                    la clase</label>
-                <select wire:model="clase_id" id="countries"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Seleccione</option>
-                    @foreach ($clases as $item)
-                        <option value="{{ $item->id }}">{{ $item->codigo }} - {{ $item->asignatura }}</option>
-                    @endforeach
-                </select>
-                <div class="errors">
-                    @error('clase_id')
-                        {{ $message }}
-                    @enderror
-                </div>
+                    la clase (No puede ser editada)</label>
+                    <input value="{{ $horario->clase->asignatura }}" type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+
             </div>
         </div>
 
@@ -128,8 +200,8 @@
             </div>
         </div>
 
-        <div class="grid md:grid-cols-3 md:gap-6 mb-4">
-            <div class="w-full mb-3">
+        <div class="grid md:grid-cols-2 md:gap-6 mb-4">
+            {{-- <div class="w-full mb-3">
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione
                     los días</label>
 
@@ -152,9 +224,9 @@
                     @enderror
                 </div>
 
-            </div>
+            </div> --}}
 
-
+{{--
             <div>
                 <label for="start-time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora de
                     inicio (ej. 10:00)</label>
@@ -176,8 +248,8 @@
                         @enderror
                     </div>
                 </div>
-            </div>
-            <div>
+            </div> --}}
+            {{-- <div>
                 <label for="end-time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora de final
                     (ej. 10:59)</label>
                 <div class="relative">
@@ -198,8 +270,8 @@
                         @enderror
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> --}}
+        {{-- </div>
         <div class="grid md:grid-cols-2 md:gap-6 mb-4">
             @if ($tipo_aula_id == 1)
                 <div>
@@ -238,10 +310,10 @@
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Guardar</button>
         </div>
 
-    </form>
+    </form> --}}
 
 
-    </div>
+    </div> --}}
     @else
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
@@ -299,9 +371,12 @@
                                 <button
                                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                                     wire:click="modeDeshabilitar({{ $item->id }})">Eliminar</button>
-                                <button  class="focus:outline-none text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900" wire:click="modeEdit({{ $item->id }})">
+                                {{-- <button  class="focus:outline-none text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900" wire:click="modeEdit({{ $item->id }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m16.475 5.408l2.117 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 0 0-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.579l5.727-5.727a1.853 1.853 0 1 0-2.621-2.621"/><path d="M19 15v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3"/></g></svg>
-                                </button>
+                                </button> --}}
+                                <button
+                                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+                                    wire:click="modeDetalles({{ $item->id }})">Detalles</button>
                             </td>
                         </tr>
                     @empty

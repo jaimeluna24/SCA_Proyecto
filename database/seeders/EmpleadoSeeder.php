@@ -14,13 +14,25 @@ class EmpleadoSeeder extends Seeder
     public function run(): void
     {
         Empleado::create([
-            'nombre' => 'Ernesto Adolfo',
-            'apellido' => 'Cardona Perez',
-            'identidad' => '0601-1990-00932',
-            'cod_empleado' => '00001',
-            'telefono' => '1234-5678',
+            'nombre' => 'Root Root',
+            'apellido' => 'Root Root',
+            'identidad' => '0000-0000-00000',
+            'cod_empleado' => '00000',
+            'telefono' => '0000-0000',
+            'email' => 'root@gmail.com',
+            'fecha_nacimiento' => '1995-01-01',
+            'estado_civil' => 'Soltero',
+            'created_by' => null,
+        ]);
+
+        Empleado::create([
+            'nombre' => 'Docente Docente',
+            'apellido' => 'Docente Docente',
+            'identidad' => '1111-1111-11111',
+            'cod_empleado' => '11111',
+            'telefono' => '1111-1111',
             'email' => 'docente@gmail.com',
-            'fecha_nacimiento' => '2000-05-10',
+            'fecha_nacimiento' => '1995-01-01',
             'estado_civil' => 'Soltero',
             'created_by' => null,
         ]);

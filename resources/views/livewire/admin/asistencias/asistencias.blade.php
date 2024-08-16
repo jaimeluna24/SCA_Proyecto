@@ -5,7 +5,7 @@
             <div class="grid md:grid-cols-3 md:gap-6 md:mb-6">
                 <div class="relative z-0 mb-5">
                     <input
-                        value="{{ $asistenciaSelected->horario->docente->nombre }} {{ $asistenciaSelected->horario->docente->apellido }}"
+                        value="{{ $asistenciaSelected->docente->nombre }} {{ $asistenciaSelected->docente->apellido }}"
                         type="text" id="floating_standard"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" " disabled />
@@ -13,7 +13,7 @@
                         class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Docente</label>
                 </div>
                 <div class="relative z-0 mb-5">
-                    <input value="{{ $asistenciaSelected->horario->clase->asignatura }}" type="text"
+                    <input value="{{ $asistenciaSelected->clase->asignatura }}" type="text"
                         id="floating_standard"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" " disabled />
@@ -21,7 +21,7 @@
                         class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Clase</label>
                 </div>
                 <div class="relative z-0 mb-5">
-                    <input value="{{ $asistenciaSelected->horario->aula->nombre }}" type="text"
+                    <input value="{{ $asistenciaSelected->aula->nombre }}" type="text"
                         id="floating_standard"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" " disabled />
@@ -32,7 +32,7 @@
             </div>
             <div class="grid md:grid-cols-3 md:gap-6 md:mb-6">
                 <div class="relative z-0 mb-5">
-                    <input value="{{ $asistenciaSelected->horario->tipo_aula->tipo }}" type="text"
+                    <input value="{{ $asistenciaSelected->tipo_aula->tipo }}" type="text"
                         id="floating_standard"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" " disabled />
@@ -49,7 +49,7 @@
                 </div>
                 <div class="relative z-0 mb-5">
                     <input
-                        value="{{ $asistenciaSelected->horario->hora_inicio }} - {{ $asistenciaSelected->horario->hora_fin }}"
+                        value="{{ $asistenciaSelected->hora_inicio }} - {{ $asistenciaSelected->hora_fin }}"
                         type="text" id="floating_standard"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" " disabled />
@@ -66,9 +66,9 @@
                     <label for="floating_standard"
                         class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Observación</label>
                 </div>
-                @if ($asistenciaSelected->horario->link)
+                @if ($asistenciaSelected->link)
                     <div class="relative z-0 mb-5">
-                        <input value="{{ $asistenciaSelected->horario->link }}" type="text" id="floating_standard"
+                        <input value="{{ $asistenciaSelected->link }}" type="text" id="floating_standard"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" " disabled />
                         <label for="floating_standard"
@@ -85,6 +85,7 @@
                     <input capture="environment" wire:model.live="evidencia"
                         class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                         id="default_size" type="file">
+
                     <div class="errors">
                         @error('evidencia')
                             {{ $message }}
@@ -93,7 +94,7 @@
                 </div>
 
                 @if ($evidenciaPreview)
-                    <div class="mt-2 w-full flex justify-center">
+                    <div class="mt-2 w-full flex flex-col  justify-center">
                         <p>Previsualización:</p>
                         <img src="{{ $evidenciaPreview }}" alt="Previsualización" style="max-width: 300px;">
                     </div>
@@ -102,6 +103,8 @@
                 </div>
             </div>
             <div class="flex flex-wrap mt-4">
+                @if ($evidenciaPreview)
+
                 <button wire:click="modePresente({{ $asistenciaSelected->id }})" type="button"
                     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">Presente</button>
                 <button wire:click="modeAusente({{ $asistenciaSelected->id }})" type="button"
@@ -109,10 +112,11 @@
                 <button wire:click="modeFalta({{ $asistenciaSelected->id }})" type="button"
                     class="focus:outline-none text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">Falta
                     Justificada</button>
-
+                    @endif
                 <button wire:click="modeList()" type="button"
                     class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Regresar</button>
             </div>
+
 
 
         </div>
@@ -137,7 +141,7 @@
                     </div>
                     <input wire:model.live="query" type="text" id="table-search"
                         class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Buscar por Aula">
+                        placeholder="Buscar por Docente">
                 </div>
                 <div class="relative max-w-sm">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -182,14 +186,15 @@
                     <tbody>
                         @forelse ($asistencias as $item)
                             <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td class="px-6 py-4">{{ $item->horario->clase->asignatura }}</td>
-                                <td class="px-6 py-4">{{ $item->fecha }}</td>
-                                <td class="px-6 py-4">{{ $item->horario->hora_inicio }}</td>
 
-                                <td class="px-6 py-4">{{ $item->horario->aula->nombre }}</td>
-                                <td class="px-6 py-4">{{ $item->horario->tipo_aula->tipo }}</td>
-                                <td class="px-6 py-4">{{ $item->horario->docente->nombre }}
-                                    {{ $item->horario->docente->apellido }}</td>
+                                <td class="px-6 py-4">{{ $item->clase->asignatura }}</td>
+                                <td class="px-6 py-4">{{ $item->fecha }}</td>
+                                <td class="px-6 py-4">{{ $item->hora_inicio }}</td>
+
+                                <td class="px-6 py-4">{{ $item->aula->nombre }}</td>
+                                <td class="px-6 py-4">{{ $item->tipo_aula->tipo }}</td>
+                                <td class="px-6 py-4">{{ $item->docente->nombre }}
+                                    {{ $item->docente->apellido }}</td>
 
                                 <td class="px-3 py-2">
                                     @if ($item->estado_id == 1)
@@ -267,14 +272,14 @@
                             <div class="flex items-center space-x-4 rtl:space-x-reverse">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                        {{ $item->horario->docente->nombre }} {{ $item->horario->docente->apellido }}
+                                        {{ $item->docente->nombre }} {{ $item->docente->apellido }}
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                        {{ $item->horario->clase->asignatura }}
+                                        {{ $item->clase->asignatura }}
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                        {{ $item->horario->aula->nombre }} - {{ $item->horario->hora_inicio }} -
-                                        {{ $item->horario->tipo_aula->tipo }}
+                                        {{ $item->aula->nombre }} - {{ $item->hora_inicio }} -
+                                        {{ $item->tipo_aula->tipo }}
                                     </p>
                                 </div>
                                 <div

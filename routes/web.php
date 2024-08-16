@@ -51,11 +51,7 @@ Route::view('/periodos', "vistas.admin.general.periodos")->middleware('auth')->n
 Route::view('/clases', "vistas.admin.general.clases")->middleware('auth')->name('clases');
 
 //Módulo de solicitudes
-Route::view('/solicitudes/crear', "vistas.docente.solicitudes.crear")->middleware('auth')->name('solicitudes-crear');
-Route::view('/solicitudes', "vistas.docente.solicitudes.mis-solicitudes")->middleware('auth')->name('mis-solicitudes');
-
 Route::view('/solicitudes-pendientes', "vistas.admin.solicitudes.solicitudes-pendientes")->middleware('auth')->name('solicitudes-pendientes');
-Route::view('/solicitudes/historial', "vistas.admin.solicitudes.historial")->middleware('auth')->name('historial-solicitudes');
 
 
 //Módulo de horarios
@@ -65,5 +61,25 @@ Route::view('/horarios-registrar', "vistas.admin.horarios.crear")->middleware('a
 //Módulo de asistencias
 Route::view('/asistencias', "vistas.admin.asistencias.asistencias")->middleware('auth')->name('asistencias');
 // Route::view('/asistencias/marcar', "vistas.admin.asistencias.marcar")->middleware('auth')->name('asistencias-marcar');
+
+// Módulo de reportes
+Route::view('/solicitudes/historial', "vistas.admin.historiales.historiales-solicitudes")->middleware('auth')->name('historial-solicitudes');
+Route::view('/asistencias/historial', "vistas.admin.historiales.historiales-asistencias")->middleware('auth')->name('historial-asistencias');
+Route::view('/horarios/historial', "vistas.admin.historiales.historiales-horarios")->middleware('auth')->name('historial-horarios');
+
+// Módulo de solicitudes
+Route::view('/solicitudes/crear', "vistas.docente.solicitudes.crear")->middleware('auth')->name('solicitudes-crear');
+Route::view('/solicitudes', "vistas.docente.solicitudes.mis-solicitudes")->middleware('auth')->name('mis-solicitudes');
+
+// Módulo de horarios
+Route::view('/docente/horarios/mis-horarios', "vistas.docente.horarios.mis-horarios")->middleware('auth')->name('mis-horarios');
+Route::view('/docente/horarios/mi-historial', "vistas.docente.horarios.mi-historial")->middleware('auth')->name('mi-historial-horarios');
+
+
+// Modulo de Asistencias
+Route::view('/docente/asistencias/mis-asistencias', "vistas.docente.asistencias.mis-asistencias")->middleware('auth')->name('mis-asistencias');
+
+//Password
+Route::view('/auth/password/change', "vistas.cambiar-password")->middleware('auth')->name('change-password');
 
 

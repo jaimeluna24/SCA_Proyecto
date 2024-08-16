@@ -129,9 +129,17 @@ class Periodos extends Component
     }
 
     public function eliminarPeriodo(){
-        if($this->periodo){
-            $this->periodo->delete();
-            toastr()->warning('Periodo eliminado éxitosamente', 'Atención', ['timeOut' => 6000]);
+        if($this->periodo->active == 1){
+            $this->periodo->update([
+                'active' => 0,
+            ]);
+            toastr()->success('Periodo deshabilitado exitosamente', 'Éxito', ['timeOut' => 5000]);
+            $this->deshabilitar = false;
+        }else{
+            $this->periodo->update([
+                'active' => 1,
+            ]);
+            toastr()->success('Periodo habilitado exitosamente', 'Éxito', ['timeOut' => 5000]);
             $this->deshabilitar = false;
         }
     }
@@ -162,4 +170,5 @@ class Periodos extends Component
             $this->modeEditar = false;
         }
     }
+
 }

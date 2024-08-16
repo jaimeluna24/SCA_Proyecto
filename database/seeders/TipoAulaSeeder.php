@@ -4,28 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\EstadoSolicitud;
 use App\Models\TipoAula;
 
-class GeneralSeeder extends Seeder
+class TipoAulaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        EstadoSolicitud::create([
-            'estado' => 'En espera',
-            'created_by' => 1
-        ]);
-
-        EstadoSolicitud::create([
-            'estado' => 'Aprobada',
-            'created_by' => 1
-        ]);
-
-        EstadoSolicitud::create([
-            'estado' => 'Rechazada',
+        TipoAula::create([
+            'tipo' => 'Híbrida',
             'created_by' => 1
         ]);
 

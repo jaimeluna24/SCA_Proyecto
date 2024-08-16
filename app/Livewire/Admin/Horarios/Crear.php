@@ -77,7 +77,7 @@ class Crear extends Component
         $tipo_aulas = TipoAula::all();
         $docentes = Docente::all();
         $clases = Carrera::find($this->carrera_id)->clases ?? collect([]);
-        $periodos = Periodo::all();
+        $periodos = Periodo::where('active', true)->get();
         $carreras = Carrera::all();
         return view('livewire.admin.horarios.crear',['aulas' => $aulas, 'tipo_aulas' => $tipo_aulas, 'docentes' => $docentes,
                                                      'clases' => $clases, 'periodos' => $periodos, 'carreras' => $carreras]);
@@ -155,16 +155,17 @@ class Crear extends Component
                             'fecha' => $fecha->format('Y-m-d'),
                             'hora_inicio' => $this->hora_inicio,
                             'hora_fin' => $this->hora_fin,
-                            // 'link' => $this->link,
+                            'link' => $this->link,
                             'observacion' => $this->observacion,
-                            // 'aula_id' => $this->aula_id,
-                            // 'tipo_aula_id' => $this->tipo_aula_id,
+                            'aula_id' => $this->aula_id,
+                            'tipo_aula_id' => $this->tipo_aula_id,
                             // 'docente_id' => $this->docente_id,
-                            // 'clase_id' => $this->clase_id,
-                            // 'periodo_id' => $this->periodo_id,
+                            'clase_id' => $this->clase_id,
+                            'periodo_id' => $this->periodo_id,
                             'usuario_id' => $user->id,
                             'estado_id' => 1,
-                            'horario_id' => $horario->id
+                            'horario_id' => $horario->id,
+                            'docente_id' => $this->docente_id
                         ]);
 
                     } else {
@@ -194,7 +195,7 @@ class Crear extends Component
 
                             });
                   });
-        })->get();
+        })->where('aula_id', $this->aula_id)->get();
 
         return $horariosExistentes->isEmpty();
     }

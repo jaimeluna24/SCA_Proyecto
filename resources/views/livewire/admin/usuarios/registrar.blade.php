@@ -15,6 +15,7 @@
      <div class="w-full mb-3">
         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el empleado</label>
         <select wire:model="empleado" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Seleccione</option>
             @foreach ($empleados as $item)
             <option value="{{ $item->nombre . ' ' . $item->apellido }}">{{ $item->nombre }} {{ $item->apellido }}</option>
             @endforeach
@@ -27,6 +28,7 @@
      <div class="mb-3">
         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el empleado</label>
         <select wire:model="role" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Seleccione</option>
             @foreach ($roles as $item)
             <option value="{{ $item->name }}">{{ $item->name }}</option>
             @endforeach
@@ -36,11 +38,11 @@
      </div>
     </div>
     <div class="grid md:grid-cols-2 md:gap-6 mb-6">
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
             <input wire:model="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
             <div class="errors">@error('email') {{ $message }} @enderror</div>
-        </div>
+        </div> --}}
      <div class="mb-3">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
         <input wire:model="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />

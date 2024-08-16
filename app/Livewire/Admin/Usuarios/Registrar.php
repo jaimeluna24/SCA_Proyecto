@@ -51,6 +51,7 @@ class Registrar extends Component
             $user = User::where('empleado_id', $empleado->id)->first();
             $this->nombre = $empleado->nombre;
             $this->apellido = $empleado->apellido;
+            $this->email = $empleado->email;
 
             $this->validate();
             if(!$user){

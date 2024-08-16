@@ -23,9 +23,6 @@ class Asistencias extends Component
     public $query ='';
     public $evidenciaPreview;
 
-
-
-
     public function render()
     {
         $fechaActual = Carbon::now('America/Tegucigalpa')->format('Y-m-d');

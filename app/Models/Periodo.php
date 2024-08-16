@@ -16,11 +16,17 @@ class Periodo extends ModelBase
         'identificador',
         'anio',
         'fecha_inicio',
-        'fecha_final'
+        'fecha_final',
+        'active'
     ];
 
      // Relación con periodo
      public function clase()
+     {
+         return $this->hasMany(Periodo::class, 'periodo_id');
+     }
+
+     public function horario()
      {
          return $this->hasMany(Periodo::class, 'periodo_id');
      }

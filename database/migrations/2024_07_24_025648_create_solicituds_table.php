@@ -19,6 +19,8 @@ return new class extends Migration
             $table->time('hora_inicio');
             $table->time('hora_final');
             $table->string('link')->nullable();
+            $table->unsignedBigInteger('clase_id')->nullable();
+            $table->foreign('clase_id')->references('id')->on('clases')->onDelete('cascade');
             $table->unsignedBigInteger('aula_id')->nullable();
             $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');
             $table->unsignedBigInteger('tipo_aula_id');
@@ -27,6 +29,8 @@ return new class extends Migration
             $table->foreign('estado_id')->references('id')->on('estado_solicituds')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('docente_id');
+            $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
             $table->integer("created_by");
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();

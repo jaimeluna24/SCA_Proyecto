@@ -1,10 +1,10 @@
 <div>
    <div class="w-full">
         <div class="grid md:grid-cols-4 md:gap-4 md:mb-6">
-            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900">
+            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900 mb-3">
                 <div class="w-7/12">
                     <p class="text-[#059669] text-2xl font-bold mb-2">
-                        90
+                        {{ $totalSolicitudes }}
                     </p>
                     <p class="text-lg">Solicitudes Pen.</p>
                 </div>
@@ -15,10 +15,10 @@
                 </div>
             </div>
 
-            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900">
+            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900 mb-3">
                 <div class="w-7/12">
                     <p class="text-[#0891b2] text-2xl font-bold mb-2">
-                        2590
+                        {{ $totalHorarios }}
                     </p>
                     <p class="text-lg">Horarios</p>
                 </div>
@@ -28,10 +28,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900">
+            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900 mb-3">
                 <div class="w-7/12">
                     <p class="text-[#e11d48] text-2xl font-bold mb-2">
-                        2590
+                        {{ $totalDocentes }}
                     </p>
                     <p class="text-lg">Docentes</p>
                 </div>
@@ -41,10 +41,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900">
+            <div class="flex border dark:border-gray-900 rounded-md h-28 items-center p-4 bg-white dark:bg-gray-900 mb-3">
                 <div class="w-7/12">
                     <p class="text-[#ea580c] text-2xl font-bold mb-2">
-                        2590
+                        {{ $totalUsuarios }}
                     </p>
                     <p class="text-lg">Usuarios</p>
                 </div>

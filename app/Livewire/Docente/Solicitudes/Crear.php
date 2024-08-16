@@ -9,6 +9,10 @@ use App\Models\EstadoSolicitud;
 use App\Models\TipoAula;
 use Illuminate\Database\QueryException;
 use Carbon\Carbon;
+use App\Models\Asistencia;
+use App\Models\Docente;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Carrera;
 
 class Crear extends Component
 {
@@ -24,19 +28,32 @@ class Crear extends Component
     public $error = false;
     public $requerir_link = false;
     public $user_id;
-
+    public $docenteId;
+    public $clase_id;
+    public $carrera_id;
 
     public function changeHora()
     {
         $this->alertWarning = false;
     }
 
+
     public function render()
     {
+        if($this->tipo_aula == 'Presencial'){
+            $this->requerir_link = false;
+        }else{
+            $this->requerir_link = true;
+        }
+
+        $carreras = Carrera::all();
+        $clases = Carrera::find($this->carrera_id)->clases ?? collect([]);
+
         $aulas = Aula::all();
         $estados = EstadoSolicitud::all();
         $tipos = TipoAula::all();
-        return view('livewire.docente.solicitudes.crear', ['aulas' => $aulas, 'estados' => $estados, 'tipos' => $tipos]);
+        return view('livewire.docente.solicitudes.crear', ['aulas' => $aulas, 'estados' => $estados, 'tipos' => $tipos,
+    'carreras' => $carreras,  'clases' => $clases]);
     }
 
     public function rules()
@@ -94,6 +111,7 @@ class Crear extends Component
             $finalExistente = $solicitudExis->hora_final;
             $inicioNueva = $this->hora_inicio;
             $finalNueva = $this->hora_final;
+            $aula_id = $aula->id;
 
             $horaInicio = Carbon::parse($inicioNueva);
             $horaFinal = Carbon::parse($finalNueva);
@@ -111,7 +129,22 @@ class Crear extends Component
                 });
             })->get();
 
-            if ($consulta->isNotEmpty()) {
+            $asistencia = Asistencia::where(function ($query) use ($horaInicio, $horaFinal) {
+                $query->where(function ($query) use ($horaInicio, $horaFinal) {
+                    $query->where('hora_inicio', '>=', $horaInicio)
+                          ->where('hora_inicio', '<', $horaFinal);
+                })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
+                    $query->where('hora_fin', '>', $horaInicio)
+                          ->where('hora_fin', '<=', $horaFinal);
+                })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
+                    $query->where('hora_inicio', '<', $horaInicio)
+                          ->where('hora_fin', '>', $horaFinal);
+                });
+            })->where('fecha', $this->fecha)->whereHas('horario', function ($query) use ($aula_id) {
+                $query->where('aula_id', $aula_id);
+            })->get();
+
+            if ($consulta->isNotEmpty() || $asistencia->isNotEmpty()) {
                     $this->alertWarning = true;
                     toastr()->warning('Aula solicitada para esa fecha y hora', 'Error', ['timeOut' => 5000]);
             } else {
@@ -128,34 +161,61 @@ class Crear extends Component
         try{
             $aula = Aula::where('nombre', $this->aula)->first();
             $tipoAula = TipoAula::where('tipo', $this->tipo_aula)->first();
+            $docente = Docente::where('empleado_id', auth()->user()->empleado_id)->first();
+            // dd($docente);
             $this->validate();
 
-            if($aula){
-                $solicitud = new Solicitud();
+            $horarioExist = Asistencia::whereHas('horario', function ($query) use ($aula) {
+                $query->where('fecha', $this->fecha)
+                      ->where('horarios.aula_id', $aula->id)
+                      ->where(function ($query) {
+                          // Verificar si el nuevo horario está contenido dentro de un horario existente
+                          $query->whereBetween('hora_inicio', [$this->hora_inicio, $this->hora_final])
+                                ->orWhereBetween('hora_fin', [$this->hora_inicio, $this->hora_final])
+                                // Verificar si un horario existente está contenido dentro del nuevo horario
+                                ->orWhere(function ($query) {
+                                    $query->where('hora_inicio', '<=', $this->hora_inicio)
+                                          ->where('hora_fin', '>=', $this->hora_final);
+                                });
+                      });
+            })->exists();
+            // dd($horarioExist);
 
-                $solicitud->fecha = $this->fecha;
-                $solicitud->hora_inicio = $this->hora_inicio;
-                $solicitud->hora_final = $this->hora_final;
-                $solicitud->descripcion = $this->descripcion;
-                $solicitud->link = $this->link;
-                $solicitud->tipo_aula_id = $tipoAula->id;
-                $solicitud->estado_id = 1;
-                $solicitud->aula_id = $aula->id;
-                $solicitud->user_id = auth()->user()->id;
+                if($horarioExist){
+                toastr()->error('Aula no disponible para ese horario', 'Error', ['timeOut' => 6000]);
 
-                $solicitud->save();
-                toastr()->success('Solicitud creada exitosamente', 'Éxito', ['timeOut' => 5000]);
+                //  dd($horarioExist);
+                }else{
+                    if($aula){
+                        $solicitud = new Solicitud();
 
-                return redirect(route('mis-solicitudes'));
-            }else{
-                $this->error = true;
-                toastr()->error('Aula incorrecta', 'Error', ['timeOut' => 5000]);
-            }
+                        $solicitud->fecha = $this->fecha;
+                        $solicitud->hora_inicio = $this->hora_inicio;
+                        $solicitud->hora_final = $this->hora_final;
+                        $solicitud->descripcion = $this->descripcion;
+                        $solicitud->link = $this->link;
+                        $solicitud->tipo_aula_id = $tipoAula->id;
+                        $solicitud->clase_id = $this->clase_id;
+                        $solicitud->estado_id = 1;
+                        $solicitud->aula_id = $aula->id;
+                        $solicitud->user_id = auth()->user()->id;
+                        $solicitud->docente_id = $docente->id;
 
+                        $solicitud->save();
+                        toastr()->success('Solicitud creada exitosamente', 'Éxito', ['timeOut' => 5000]);
+
+                        return redirect(route('mis-solicitudes'));
+                    }else{
+                        $this->error = true;
+                        toastr()->error('Aula incorrecta', 'Error', ['timeOut' => 5000]);
+                    }
+
+                }
 
         }catch (QueryException $e){
             $errorCode = $e->errorInfo[1];
             if ($errorCode == 1451) {
+                // dd($errorCode);
                 toastr()->error('Hay un error en la petición, comunicate con el administrador', 'Error', ['timeOut' => 5000]);
 
             } elseif ($errorCode == 1048) {
@@ -164,6 +224,8 @@ class Crear extends Component
             } elseif ($errorCode == 1216 || $errorCode == 1217) {
                 toastr()->error('Hay un error en la petición, comunicate con el administrador', 'Error', ['timeOut' => 5000]);
             } else {
+                // dd($errorCode);
+
                 toastr()->error('Error en la base de datos, comunicate con el administrador', 'Error', ['timeOut' => 5000]);
 
             }

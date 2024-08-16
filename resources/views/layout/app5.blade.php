@@ -94,34 +94,69 @@
 
         </div>
         <div class="flex items-center">
-            <div class="flex items-center ms-3">
-              <div>
+            <div class="flex items-center ms-3 gap-4">
+                {{-- <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="relative">
+                    <svg class="w-8 h-8 text-teal-600 animate-wiggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M15.585 15.5H5.415A1.65 1.65 0 0 1 4 13a10.526 10.526 0 0 0 1.5-5.415V6.5a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.085c0 1.907.518 3.78 1.5 5.415a1.65 1.65 0 0 1-1.415 2.5zm1.915-11c-.267-.934-.6-1.6-1-2s-1.066-.733-2-1m-10.912 3c.209-.934.512-1.6.912-2s1.096-.733 2.088-1M13 17c-.667 1-1.5 1.5-2.5 1.5S8.667 18 8 17"/></svg>
+                    <div class="px-1 bg-teal-500 rounded-full text-center text-white text-sm absolute -top-3 -end-2">
+                        3
+                        <div class="absolute top-0 start-0 rounded-full -z-10 animate-ping bg-teal-200 w-full h-full" ></div>
+                    </div>
+                </button>
+
+
+                <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
+                    <div class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
+                        Notificaciones
+                    </div>
+                    <div class="divide-y divide-gray-100 dark:divide-gray-700">
+                      <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+
+                        <div class="w-full ps-3">
+                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey, what's up? All set for the presentation?"</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
+                        </div>
+                      </a>
+                    </div>
+                    <a href="#" class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
+                      <div class="inline-flex items-center ">
+                        <svg class="w-4 h-4 me-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                          <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                        </svg>
+                          View all
+                      </div>
+                    </a>
+                </div> --}}
+
+
+
+
+
+
+              <div class="flex gap-4 items-center">
+                <p class="hidden md:block text-sm text-gray-900 dark:text-white" role="none">
+                    {{ Auth::user()->name }}
+                  </p>
                 <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 12a4 4 0 1 1 0-8a4 4 0 0 1 0 8m0 3c3.186 0 6.045.571 8 3.063V20H4v-1.937C5.955 15.57 8.814 15 12 15"/></svg>
                 </button>
               </div>
               <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                 <div class="px-4 py-3" role="none">
                   <p class="text-sm text-gray-900 dark:text-white" role="none">
-                    Neil Sims
+                    {{ Auth::user()->name }}
                   </p>
                   <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                    neil.sims@flowbite.com
+                    {{ Auth::user()->email }}
                   </p>
                 </div>
                 <ul class="py-1" role="none">
                   <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                    <a href="{{ route('change-password') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Cambiar contraseña</a>
                   </li>
+
                   <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                    <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Cerrar Sesión</a>
                   </li>
                 </ul>
               </div>
@@ -143,33 +178,52 @@
                  <span class="ms-3">Dashboard</span>
               </a>
            </li>
-
+         @role('Administrador')
           <li class="border-b-2 dark:border-gray-800">
             <a href="{{ route('asistencias') }}" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example2" data-collapse-toggle="dropdown-example2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="m34 10l8 8m0-8l-8 8m10 12l-7 8l-4-4"/><path fill="#666666" d="M26 10H4v8h22zm0 20H4v8h22z"/></g></svg>
                   <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Asistencias</span>
-
             </a>
-
           </li>
+          @endrole
+          @role('Docente')
+          <li class="border-b-2 dark:border-gray-800">
+            <a href="{{ route('mis-asistencias') }}" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example2" data-collapse-toggle="dropdown-example2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="m34 10l8 8m0-8l-8 8m10 12l-7 8l-4-4"/><path fill="#666666" d="M26 10H4v8h22zm0 20H4v8h22z"/></g></svg>
+                  <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Mis asistencias</span>
+            </a>
+          </li>
+          @endrole
+          @role('Administrador')
            <li class="border-b-2 dark:border-gray-800">
-            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+            <a href="{{ route('solicitudes-pendientes') }}" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                 <svg xmlns="http://www.w3.org/2000/svg" width="17.78" height="20" viewBox="0 0 384 432"><path fill="#666666" d="M341 45q18 0 30.5 12.5T384 88v299q0 17-12.5 29.5T341 429H43q-18 0-30.5-12.5T0 387V88q0-18 12.5-30.5T43 45h89q7-19 23.5-30.5T192 3t36.5 11.5T252 45zm-149 0q-9 0-15 6.5t-6 15t6 15t15 6.5t15-6.5t6-15t-6-15t-15-6.5m43 299v-43H85v43zm64-85v-43H85v43zm0-86v-42H85v42z"/></svg>
                   <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Solicitudes</span>
+
+            </a>
+           </li>
+           @endrole
+           @role('Docente')
+           <li class="border-b-2 dark:border-gray-800">
+            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example18" data-collapse-toggle="dropdown-example18">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17.78" height="20" viewBox="0 0 384 432"><path fill="#666666" d="M341 45q18 0 30.5 12.5T384 88v299q0 17-12.5 29.5T341 429H43q-18 0-30.5-12.5T0 387V88q0-18 12.5-30.5T43 45h89q7-19 23.5-30.5T192 3t36.5 11.5T252 45zm-149 0q-9 0-15 6.5t-6 15t6 15t15 6.5t15-6.5t6-15t-6-15t-15-6.5m43 299v-43H85v43zm64-85v-43H85v43zm0-86v-42H85v42z"/></svg>
+                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Solicitudes</span>
+
                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                   </svg>
             </button>
-            <ul id="dropdown-example" class="hidden py-2 space-y-2">
+            <ul id="dropdown-example18" class="hidden py-2 space-y-2">
                  <li>
-                    <a href="{{ route('solicitudes-pendientes') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Solicitudes Pendientes</a>
+                    <a href="{{ route('solicitudes-crear') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Crear solicitud</a>
                  </li>
                  <li>
-                    <a href="{{ route('historial-solicitudes') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Historial de Solicitudes</a>
+                    <a href="{{ route('mis-solicitudes') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Mis solicitudes</a>
                  </li>
+          </ul>
+          </li>
+          @endrole
 
-            </ul>
-           </li>
           <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example1" data-collapse-toggle="dropdown-example1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#666666" d="M14 12h1.5v2.82l2.44 1.41l-.75 1.3L14 15.69zM4 2h14a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m0 13v3h4.67c-.43-.91-.67-1.93-.67-3zm0-7h6V5H4zm14 0V5h-6v3zM4 13h4.29c.34-1.15.97-2.18 1.81-3H4zm11-2.85A4.85 4.85 0 0 0 10.15 15c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 19.85 15c0-2.68-2.17-4.85-4.85-4.85"/></svg>
@@ -179,35 +233,47 @@
                   </svg>
             </button>
             <ul id="dropdown-example1" class="hidden py-2 space-y-2">
+                @role('Administrador')
                  <li>
                     <a href="{{ route('horarios') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Horarios</a>
                  </li>
                  <li>
                     <a href="{{ route('horarios-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registrar Horario</a>
                  </li>
+                 @endrole
+                 @role('Docente')
+                 <li>
+                    <a href="{{ route('mis-horarios') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Mis horarios</a>
+                 </li>
+                 <li>
+                    <a href="{{ route('mi-historial-horarios') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Historial de horarios</a>
+                 </li>
+                 @endrole
           </ul>
           </li>
-
+          @role('Administrador')
           <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example3" data-collapse-toggle="dropdown-example3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#666666" d="M2 2h2v18h18v2H2zm5 8h10v3H7zm4 5h10v3H11zM6 4h16v4h-2V6H8v2H6z"/></svg>
-                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Historiales</span>
+                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Reportes</span>
                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                   </svg>
             </button>
             <ul id="dropdown-example3" class="hidden py-2 space-y-2">
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                    <a href="{{ route('historial-horarios') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Historial de horarios</a>
                  </li>
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                    <a href="{{ route('historial-asistencias') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Historial de asistencias</a>
                  </li>
                  <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
+                    <a href="{{ route('historial-solicitudes') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Historial de solictudes</a>
                  </li>
             </ul>
           </li>
+          @endrole
+          @role('Administrador')
           <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example4" data-collapse-toggle="dropdown-example4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 640 512"><path fill="#666666" d="M144 0a80 80 0 1 1 0 160a80 80 0 1 1 0-160m368 0a80 80 0 1 1 0 160a80 80 0 1 1 0-160M0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96H21.3C9.6 320 0 310.4 0 298.7M405.3 320h-.7c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7c58.9 0 106.7 47.8 106.7 106.7c0 11.8-9.6 21.3-21.3 21.3H405.4zM224 224a96 96 0 1 1 192 0a96 96 0 1 1-192 0m-96 261.3c0-73.6 59.7-133.3 133.3-133.3h117.3c73.7 0 133.4 59.7 133.4 133.3c0 14.7-11.9 26.7-26.7 26.7H154.6c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
@@ -225,6 +291,8 @@
                  </li>
             </ul>
           </li>
+          @endrole
+          @role('Administrador')
           <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example5" data-collapse-toggle="dropdown-example5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><path fill="#666666" d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h13.39a8 8 0 0 0 7.23-4.57a48 48 0 0 1 86.76 0a8 8 0 0 0 7.23 4.57H216a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16M104 168a32 32 0 1 1 32-32a32 32 0 0 1-32 32m112 32h-56.57a64 64 0 0 0-13.16-16H192a8 8 0 0 0 8-8V80a8 8 0 0 0-8-8H64a8 8 0 0 0-8 8v96a8 8 0 0 0 6 7.75A63.7 63.7 0 0 0 48.57 200H40V56h176Z"/></svg>
@@ -243,6 +311,8 @@
 
             </ul>
           </li>
+          @endrole
+          @role('Administrador')
           <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example6" data-collapse-toggle="dropdown-example6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 36 36"><ellipse cx="18" cy="11.28" fill="#666666" rx="4.76" ry="4.7"/><path fill="#666666" d="M10.78 11.75h.48v-.43a6.7 6.7 0 0 1 3.75-6a4.62 4.62 0 1 0-4.21 6.46Zm13.98-.47v.43h.48A4.58 4.58 0 1 0 21 5.29a6.7 6.7 0 0 1 3.76 5.99m-2.47 5.17a21.5 21.5 0 0 1 5.71 2a2.7 2.7 0 0 1 .68.53H34v-3.42a.72.72 0 0 0-.38-.64a18 18 0 0 0-8.4-2.05h-.66a6.66 6.66 0 0 1-2.27 3.58M6.53 20.92A2.76 2.76 0 0 1 8 18.47a21.5 21.5 0 0 1 5.71-2a6.66 6.66 0 0 1-2.27-3.55h-.66a18 18 0 0 0-8.4 2.05a.72.72 0 0 0-.38.64V22h4.53Zm14.93 5.77h5.96v1.4h-5.96z"/><path fill="#666666" d="M32.81 21.26h-6.87v-1a1 1 0 0 0-2 0v1H22v-2.83a20 20 0 0 0-4-.43a19.3 19.3 0 0 0-9.06 2.22a.76.76 0 0 0-.41.68v5.61h7.11v6.09a1 1 0 0 0 1 1h16.17a1 1 0 0 0 1-1V22.26a1 1 0 0 0-1-1m-1 10.36H17.64v-8.36h6.3v.91a1 1 0 0 0 2 0v-.91h5.87Z"/></svg>
@@ -261,6 +331,8 @@
 
             </ul>
           </li>
+          @endrole
+          @role('Administrador')
           <li class="border-b-2 dark:border-gray-800">
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example7" data-collapse-toggle="dropdown-example7">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="#666666" d="M36.571 475.429h73.143V365.714H36.571zM109.714 36.57H36.571v182.86h73.143zm182.857 0H219.43v73.143h73.142zM0 329.143h146.286V256H0zm219.429 146.286h73.142V256H219.43zm-36.572-256h146.286v-73.143H182.857zM475.43 36.57h-73.143V256h73.143zm-109.715 256v73.143H512V292.57zm36.572 182.858h73.143v-73.143h-73.143z"/></svg>
@@ -284,6 +356,7 @@
                  </li>
            </ul>
           </li>
+          @endrole
         </ul>
      </div>
   </aside>

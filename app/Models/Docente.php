@@ -33,7 +33,17 @@ class Docente extends ModelBase
 
     public function horarios()
     {
-        return $this->hasMany(Horario::class);
+        return $this->hasMany(Horario::class, 'docente_id');
+    }
+
+    public function asistencia()
+    {
+        return $this->hasMany(Asistencia::class, 'docente_id');
+    }
+
+    public function solicitud()
+    {
+        return $this->hasMany(Solicitud::class, 'docente_id');
     }
 
 

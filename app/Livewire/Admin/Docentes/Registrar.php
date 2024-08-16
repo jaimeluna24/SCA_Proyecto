@@ -54,6 +54,7 @@ class Registrar extends Component
             $this->identidad = $empleado->identidad;
             $this->telefono = $empleado->telefono;
             $this->fecha_nacimiento = $empleado->fecha_nacimiento;
+            $this->email = $empleado->email;
 
             $docent = Docente::where('empleado_id', $empleado->id)->first();
 

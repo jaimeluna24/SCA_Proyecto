@@ -32,4 +32,8 @@ class Clase extends ModelBase
     {
         return $this->belongsToMany(Carrera::class, 'carrera_clases');
     }
+    public function solicitud()
+    {
+        return $this->hasMany(Solicitud::class, 'clase_id');
+    }
 }

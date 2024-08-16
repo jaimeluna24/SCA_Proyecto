@@ -99,6 +99,7 @@
                          <span class="symbol-input100">
                              <i class="fa fa-envelope" aria-hidden="true"></i>
                          </span>
+                         {{-- <div class="errors">@error('email') {{ $message }} @enderror</div> --}}
                      </div>
 
                      <div class="wrap-input100 validate-input" data-validate = "La Contraseña es requerida">
@@ -107,22 +108,29 @@
                          <span class="symbol-input100">
                              <i class="fa fa-lock" aria-hidden="true"></i>
                          </span>
+                         {{-- <div class="errors">@error('password') {{ $message }} @enderror</div> --}}
                      </div>
 
-                     <div class="container-login100-form-btn">
+                     <div class="container-login100-form-btn mb-2">
                          <button class="login100-form-btn">
                              ACCESO
                          </button>
                      </div>
 
-                     <div class="text-center p-t-12">
+                     @if ($errors->has('email'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('email') }}
+                        </div>
+                     @endif
+
+                     {{-- <div class="text-center p-t-12">
                          <span class="txt1">
                              ¿Olvidó su
                          </span>
                          <a class="txt2" href="#">
                              contraseña?
                          </a>
-                     </div>
+                     </div> --}}
                  </form>
              </div>
          </div>

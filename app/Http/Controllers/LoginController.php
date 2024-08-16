@@ -25,24 +25,28 @@ class LoginController extends Controller
         return redirect(route('inicio'));
     }
 
+
+
     public function login(Request $request)
-    {
-        $credentials = [
-            "email" => $request->email,
-            "password" => $request->password,
-        ];
+{
+    $credentials = [
+        "email" => $request->email,
+        "password" => $request->password,
+    ];
 
-        $remember = ($request->has('remember') ? true : false);
+    $remember = $request->has('remember') ? true : false;
 
-        if(Auth::attempt($credentials, $remember))
-        {
-            $request->session()->regenerate();
+    if (Auth::attempt($credentials, $remember)) {
+        $request->session()->regenerate();
 
-            return redirect()->intended(route('inicio'));
-        }else{
-            return redirect('login');
-        }
+        return redirect()->intended(route('inicio'));
+    } else {
+        // Almacenar el mensaje de error en la sesión
+        return redirect('login')->withErrors([
+            'email' => 'Las credenciales no son correctas. Por favor, verifica tu correo electrónico y contraseña.',
+        ]);
     }
+}
 
     public function logout(Request $request)
     {

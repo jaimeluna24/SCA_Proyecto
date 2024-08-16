@@ -1,21 +1,3 @@
-{{-- @extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
-
-@section('content')
-    @livewire('admin.dashboard.dashboard')
-@stop
-
-@section('css')
-@stop
-
-@section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop --}}
 
 
 @extends('layout.app5')
@@ -62,6 +44,12 @@
   </ol>
 @stop
 @section('content')
+@role('Administrador')
     @livewire('admin.dashboard.dashboard')
+    @endrole
+
+    @role('Docente')
+    @livewire('docente.dashboard.dashboard')
+    @endrole
 @stop
 @endrole

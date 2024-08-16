@@ -14,14 +14,14 @@ class DocenteSeeder extends Seeder
     public function run(): void
     {
         Docente::create([
-            'nombre' => 'Marcos David',
-            'apellido' => 'Gutierrez Lopez',
-            'identidad' => '0601-1990-00932',
+            'nombre' => 'Docente Docente',
+            'apellido' => 'Docente Docente',
+            'identidad' => '1111-1111-11111',
             'email' => 'docente@gmail.com',
             'telefono' => '1243-6578',
-            'fecha_nacimiento' => '2000-05-10',
+            'fecha_nacimiento' => '1995-01-01',
             'sede_id' => 1,
-            'empleado_id' => 1,
+            'empleado_id' => 2,
             'created_by' => 1,
         ]);
     }

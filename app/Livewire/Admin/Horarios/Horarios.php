@@ -4,6 +4,12 @@ namespace App\Livewire\Admin\Horarios;
 
 use App\Models\Horario;
 use Livewire\Component;
+use App\Models\Aula;
+use App\Models\TipoAula;
+use App\Models\Docente;
+use App\Models\Clase;
+use App\Models\Periodo;
+use App\Models\Carrera;
 
 class Horarios extends Component
 {
@@ -65,18 +71,33 @@ class Horarios extends Component
     public $claseName;
     public $deshabilitar = false;
     public $modeEditar = false;
+    public $modeDetalle = false;
+
 
 
     public function render()
     {
-        $horarios = Horario::whereHas('docente', function($query) {
-                                 $query->where('nombre', 'like', '%'.$this->query.'%')
-                                 ->orWhere('apellido', 'like', '%'.$this->query.'%');
-                             })
-                             ->orWhereHas('aula', function($query) {
-                                $query->where('nombre', 'like', '%'.$this->query.'%');
-                            })->get();
-        return view('livewire.admin.horarios.horarios', ['horarios' => $horarios]);
+        $aulas = Aula::all();
+        $tipo_aulas = TipoAula::all();
+        $docentes = Docente::all();
+        $clases = Carrera::find($this->carrera_id)->clases ?? collect([]);
+        $periodos = Periodo::where('active', true)->get();
+        $carreras = Carrera::all();
+        $horarios = Horario::where(function($query) {
+            $query->whereHas('docente', function($query) {
+                $query->where('nombre', 'like', '%'.$this->query.'%')
+                      ->orWhere('apellido', 'like', '%'.$this->query.'%');
+            })
+            ->orWhereHas('aula', function($query) {
+                $query->where('nombre', 'like', '%'.$this->query.'%');
+            });
+        })
+        ->whereHas('periodo', function($query) {
+            $query->where('active', true);
+        })
+        ->get();
+        return view('livewire.admin.horarios.horarios', ['horarios' => $horarios, 'aulas' => $aulas, 'tipo_aulas' => $tipo_aulas, 'docentes' => $docentes,
+                                                     'clases' => $clases, 'periodos' => $periodos, 'carreras' => $carreras]);
     }
 
     public function rules()
@@ -150,6 +171,8 @@ class Horarios extends Component
         $this->periodo_id = null;
         $this->deshabilitar = false;
         $this->modeEditar = false;
+        $this->modeDetalle = false;
+
     }
 
     public function modeDeshabilitar($id){
@@ -166,9 +189,27 @@ class Horarios extends Component
         }
     }
 
-    public function modeEdit($id){
+    public function modeDetalles($id){
+        $this->modeDetalle = true;
+
         $this->horario = Horario::find($id);
         $this->dias = $this->horario->dias;
+        $this->hora_inicio = $this->horario->hora_inicio;;
+        $this->hora_fin = $this->horario->hora_fin;
+        $this->link = $this->horario->link;
+        $this->observacion = $this->horario->observacion;
+        $this->aula_id =$this->horario->aula_id;
+        $this->tipo_aula_id =$this->horario->tipo_aula_id;
+        $this->docente_id =$this->horario->docente_id;
+        $this->clase_id =$this->horario->clase_id;
+        $this->periodo_id =$this->horario->periodo_id;
+        $this->deshabilitar = $this->horario->deshabilitar;
+    }
+
+    public function modeEdit($id){
+        $this->modeEditar = true;
+        $this->horario = Horario::find($id);
+        // $this->dias = $this->horario->dias;
         $this->hora_inicio = $this->horario->hora_inicio;;
         $this->hora_fin = $this->horario->hora_fin;
         $this->link = $this->horario->link;

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->time('hora_inicio');
             $table->time('hora_final');
             $table->string('link')->nullable();
-            $table->unsignedBigInteger('clase_id')->nullable();
+            $table->unsignedBigInteger('clase_id');
             $table->foreign('clase_id')->references('id')->on('clases')->onDelete('cascade');
             $table->unsignedBigInteger('aula_id')->nullable();
             $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');

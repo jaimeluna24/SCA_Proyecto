@@ -38,6 +38,14 @@ class LoginController extends Controller
 
     if (Auth::attempt($credentials, $remember)) {
         $request->session()->regenerate();
+        $user = Auth::user();
+         // Compara la contraseña actual con la que deseas
+         if (Hash::check('12345678', $user->password)) {
+            session()->flash('message', 'Necesitas cambiar tu contraseña.');
+            return redirect()->route('change-password'); // Redirige a la página de cambio de contraseña
+        }
+
+
 
         return redirect()->intended(route('inicio'));
     } else {

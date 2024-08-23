@@ -64,7 +64,6 @@ class Crear extends Component
             'hora_final' => 'required|date_format:H:i|after:hora_inicio',
             'descripcion' => 'required',
             'link' => 'required_if:tipo_aula,Virtual',
-            'aula' => 'required_if:tipo_aula,Presencial',
         ];
     }
 
@@ -85,108 +84,107 @@ class Crear extends Component
             'descripcion.required' => 'El campo descripción es requerido.',
 
             'link.required_if' => 'El campo link es requerido cuando el tipo de aula es virtual.',
-            'aula.required_if' => 'El campo aula es requerido cuando el tipo de aula es presencial.',
         ];
     }
 
     public function validarExistencia()
     {
         $this->validate();
-        // if($this->tipo_aula == 'Virtual'){
-        //     $this->requerir_link = true;
-        // }else {
-        //     $this->requerir_link = false;
-        // }
-        $aula = Aula::where('nombre', $this->aula)->first();
-        // $solicitudExis = Solicitud::where('fecha', $this->fecha)->
-        //                             where('hora_inicio', $this->hora_inicio)->
-        //                             where('hora_final', $this->hora_final)->
-        //                             where('aula_id', $aula->id)->first();
-        $solicitudExis = Solicitud::where('fecha', $this->fecha)
-                                  ->where('aula_id', $aula->id)
-                                  ->first();
+        // // if($this->tipo_aula == 'Virtual'){
+        // //     $this->requerir_link = true;
+        // // }else {
+        // //     $this->requerir_link = false;
+        // // }
+        // $aula = Aula::where('nombre', $this->aula)->first();
+        // // $solicitudExis = Solicitud::where('fecha', $this->fecha)->
+        // //                             where('hora_inicio', $this->hora_inicio)->
+        // //                             where('hora_final', $this->hora_final)->
+        // //                             where('aula_id', $aula->id)->first();
+        // $solicitudExis = Solicitud::where('fecha', $this->fecha)
+        //                           ->where('aula_id', $aula->id)
+        //                           ->first();
 
-        if ($solicitudExis) {
-            $inicioExistente = $solicitudExis->hora_inicio;
-            $finalExistente = $solicitudExis->hora_final;
-            $inicioNueva = $this->hora_inicio;
-            $finalNueva = $this->hora_final;
-            $aula_id = $aula->id;
+        // if ($solicitudExis) {
+        //     $inicioExistente = $solicitudExis->hora_inicio;
+        //     $finalExistente = $solicitudExis->hora_final;
+        //     $inicioNueva = $this->hora_inicio;
+        //     $finalNueva = $this->hora_final;
+        //     $aula_id = $aula->id;
 
-            $horaInicio = Carbon::parse($inicioNueva);
-            $horaFinal = Carbon::parse($finalNueva);
+        //     $horaInicio = Carbon::parse($inicioNueva);
+        //     $horaFinal = Carbon::parse($finalNueva);
 
-            $consulta = Solicitud::where(function ($query) use ($horaInicio, $horaFinal) {
-                $query->where(function ($query) use ($horaInicio, $horaFinal) {
-                    $query->where('hora_inicio', '>=', $horaInicio)
-                          ->where('hora_inicio', '<', $horaFinal);
-                })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
-                    $query->where('hora_final', '>', $horaInicio)
-                          ->where('hora_final', '<=', $horaFinal);
-                })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
-                    $query->where('hora_inicio', '<', $horaInicio)
-                          ->where('hora_final', '>', $horaFinal);
-                });
-            })->get();
+        //     $consulta = Solicitud::where(function ($query) use ($horaInicio, $horaFinal) {
+        //         $query->where(function ($query) use ($horaInicio, $horaFinal) {
+        //             $query->where('hora_inicio', '>=', $horaInicio)
+        //                   ->where('hora_inicio', '<', $horaFinal);
+        //         })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
+        //             $query->where('hora_final', '>', $horaInicio)
+        //                   ->where('hora_final', '<=', $horaFinal);
+        //         })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
+        //             $query->where('hora_inicio', '<', $horaInicio)
+        //                   ->where('hora_final', '>', $horaFinal);
+        //         });
+        //     })->get();
 
-            $asistencia = Asistencia::where(function ($query) use ($horaInicio, $horaFinal) {
-                $query->where(function ($query) use ($horaInicio, $horaFinal) {
-                    $query->where('hora_inicio', '>=', $horaInicio)
-                          ->where('hora_inicio', '<', $horaFinal);
-                })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
-                    $query->where('hora_fin', '>', $horaInicio)
-                          ->where('hora_fin', '<=', $horaFinal);
-                })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
-                    $query->where('hora_inicio', '<', $horaInicio)
-                          ->where('hora_fin', '>', $horaFinal);
-                });
-            })->where('fecha', $this->fecha)->whereHas('horario', function ($query) use ($aula_id) {
-                $query->where('aula_id', $aula_id);
-            })->get();
+        //     $asistencia = Asistencia::where(function ($query) use ($horaInicio, $horaFinal) {
+        //         $query->where(function ($query) use ($horaInicio, $horaFinal) {
+        //             $query->where('hora_inicio', '>=', $horaInicio)
+        //                   ->where('hora_inicio', '<', $horaFinal);
+        //         })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
+        //             $query->where('hora_fin', '>', $horaInicio)
+        //                   ->where('hora_fin', '<=', $horaFinal);
+        //         })->orWhere(function ($query) use ($horaInicio, $horaFinal) {
+        //             $query->where('hora_inicio', '<', $horaInicio)
+        //                   ->where('hora_fin', '>', $horaFinal);
+        //         });
+        //     })->where('fecha', $this->fecha)->whereHas('horario', function ($query) use ($aula_id) {
+        //         $query->where('aula_id', $aula_id);
+        //     })->get();
 
-            if ($consulta->isNotEmpty() || $asistencia->isNotEmpty()) {
-                    $this->alertWarning = true;
-                    toastr()->warning('Aula solicitada para esa fecha y hora', 'Error', ['timeOut' => 5000]);
-            } else {
-                $this->register();
-            }
-        } else {
+        //     if ($consulta->isNotEmpty() || $asistencia->isNotEmpty()) {
+        //             $this->alertWarning = true;
+        //             toastr()->warning('Aula solicitada para esa fecha y hora', 'Error', ['timeOut' => 5000]);
+        //     } else {
+        //         $this->register();
+        //     }
+        // } else {
             $this->register();
 
-        }
+        // }
     }
 
     public function register()
     {
         try{
-            $aula = Aula::where('nombre', $this->aula)->first();
+            // $aula = Aula::where('nombre', $this->aula)->first();
             $tipoAula = TipoAula::where('tipo', $this->tipo_aula)->first();
             $docente = Docente::where('empleado_id', auth()->user()->empleado_id)->first();
             // dd($docente);
             $this->validate();
 
-            $horarioExist = Asistencia::whereHas('horario', function ($query) use ($aula) {
-                $query->where('fecha', $this->fecha)
-                      ->where('horarios.aula_id', $aula->id)
-                      ->where(function ($query) {
-                          // Verificar si el nuevo horario está contenido dentro de un horario existente
-                          $query->whereBetween('hora_inicio', [$this->hora_inicio, $this->hora_final])
-                                ->orWhereBetween('hora_fin', [$this->hora_inicio, $this->hora_final])
-                                // Verificar si un horario existente está contenido dentro del nuevo horario
-                                ->orWhere(function ($query) {
-                                    $query->where('hora_inicio', '<=', $this->hora_inicio)
-                                          ->where('hora_fin', '>=', $this->hora_final);
-                                });
-                      });
-            })->exists();
+            // $horarioExist = Asistencia::whereHas('horario', function ($query) use ($aula) {
+            //     $query->where('fecha', $this->fecha)
+            //           ->where('horarios.aula_id', $aula->id)
+            //           ->where(function ($query) {
+            //               // Verificar si el nuevo horario está contenido dentro de un horario existente
+            //               $query->whereBetween('hora_inicio', [$this->hora_inicio, $this->hora_final])
+            //                     ->orWhereBetween('hora_fin', [$this->hora_inicio, $this->hora_final])
+            //                     // Verificar si un horario existente está contenido dentro del nuevo horario
+            //                     ->orWhere(function ($query) {
+            //                         $query->where('hora_inicio', '<=', $this->hora_inicio)
+            //                               ->where('hora_fin', '>=', $this->hora_final);
+            //                     });
+            //           });
+            // })->exists();
             // dd($horarioExist);
 
-                if($horarioExist){
-                toastr()->error('Aula no disponible para ese horario', 'Error', ['timeOut' => 6000]);
+                // if($horarioExist){
+                // toastr()->error('Aula no disponible para ese horario', 'Error', ['timeOut' => 6000]);
 
-                //  dd($horarioExist);
-                }else{
-                    if($aula){
+                // //  dd($horarioExist);
+                // }else{
+                //     if($aula){
                         $solicitud = new Solicitud();
 
                         $solicitud->fecha = $this->fecha;
@@ -197,7 +195,6 @@ class Crear extends Component
                         $solicitud->tipo_aula_id = $tipoAula->id;
                         $solicitud->clase_id = $this->clase_id;
                         $solicitud->estado_id = 1;
-                        $solicitud->aula_id = $aula->id;
                         $solicitud->user_id = auth()->user()->id;
                         $solicitud->docente_id = $docente->id;
 
@@ -205,12 +202,12 @@ class Crear extends Component
                         toastr()->success('Solicitud creada exitosamente', 'Éxito', ['timeOut' => 5000]);
 
                         return redirect(route('mis-solicitudes'));
-                    }else{
-                        $this->error = true;
-                        toastr()->error('Aula incorrecta', 'Error', ['timeOut' => 5000]);
-                    }
+                    // }else{
+                    //     $this->error = true;
+                    //     toastr()->error('Aula incorrecta', 'Error', ['timeOut' => 5000]);
+                    // }
 
-                }
+                // }
 
         }catch (QueryException $e){
             $errorCode = $e->errorInfo[1];

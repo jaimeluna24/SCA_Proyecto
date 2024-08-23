@@ -11,6 +11,7 @@ use App\Models\Clase;
 use App\Models\Periodo;
 use App\Models\Carrera;
 use App\Models\Horario;
+use App\Models\HorarioCarrera;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -69,16 +70,19 @@ class Crear extends Component
     public $periodo_id;
     public $usuario_id;
     public $dias = [];
-
+    public $carrerasSelected = [];
+    public $query ='';
+    public $claseSelected = '';
 
     public function render()
     {
         $aulas = Aula::all();
         $tipo_aulas = TipoAula::all();
         $docentes = Docente::all();
-        $clases = Carrera::find($this->carrera_id)->clases ?? collect([]);
+        $clases = Clase::all();
         $periodos = Periodo::where('active', true)->get();
         $carreras = Carrera::all();
+        // $carreras = Carrera::where('carrera', 'like', '%'.$this->query.'%')->get();
         return view('livewire.admin.horarios.crear',['aulas' => $aulas, 'tipo_aulas' => $tipo_aulas, 'docentes' => $docentes,
                                                      'clases' => $clases, 'periodos' => $periodos, 'carreras' => $carreras]);
     }
@@ -91,27 +95,50 @@ class Crear extends Component
         $this->aula_id = null;
         $this->tipo_aula_id = null;
         $this->docente_id = null;
-        $this->clase_id = null;
+        $this->claseSelected = '';
         $this->periodo_id = null;
 
         $this->carrera_id = null;
         $this->dias = [];
+        $this->carrerasSelected = [];
     }
 
     public function register()
     {
-        $this->validate();
-        $user = Auth::user();
-        $dias_espanol = [];
-        foreach ($this->dias as $dia) {
-            $dias_espanol[] = $this->traduccion_dias[$dia];
-        }
+        if($this->claseSelected){
+            $clase = Clase::where('asignatura', $this->claseSelected)->first();
+            // dd($clase);
 
-        $dias = implode(', ', $dias_espanol);
+        }
+        // $this->validate();
+        $this->validate([
+            'hora_inicio' => 'required',
+            'hora_fin' => 'required',
+            'observacion' => 'required',
+            'aula_id' => 'required',
+            'tipo_aula_id' => 'required',
+            'docente_id' => 'required',
+            'periodo_id' => 'required',
+            'dias' => 'required'
+        ]);
+        // if($clase){
+        //     dd($clase);
+        // }
+        // dd('nada');
+
+        $user = Auth::user();
+        $dias_espanol = '';
+        // foreach ($this->dias as $dia) {
+            $dias_espanol = $this->traduccion_dias[$this->dias];
+        // }
+        // dd($dias_espanol);
+
+
+        // $dias = implode(', ', $dias_espanol);
 
         $horario = new Horario();
 
-        $horario->dias = $dias;
+        $horario->dias = $dias_espanol;
         $horario->hora_inicio = $this->hora_inicio;
         $horario->hora_fin = $this->hora_fin;
         $horario->link = $this->link;
@@ -119,12 +146,12 @@ class Crear extends Component
         $horario->aula_id = $this->aula_id;
         $horario->tipo_aula_id = $this->tipo_aula_id;
         $horario->docente_id = $this->docente_id;
-        $horario->clase_id = $this->clase_id;
+        $horario->clase_id = $clase->id;
         $horario->periodo_id = $this->periodo_id;
         $horario->usuario_id = $user->id;
 
         if (!$this->validarHorario($horario)) {
-            toastr()->error('El aula ya esta ocupada para esas fechas y horarios', 'Error', ['timeOut' => 5000]);
+            toastr()->error('El aula o decente no esta disponible para ese horario', 'Error', ['timeOut' => 5000]);
 
             // $this->addError('horario', 'Este horario coincide con otro existente.');
             return;
@@ -137,9 +164,17 @@ class Crear extends Component
         $startDate = Carbon::parse($periodo->fecha_inicio);
         $endDate = Carbon::parse($periodo->fecha_final);
 
+        if($horario){
+            foreach($this->carrerasSelected as $carrera){
+                HorarioCarrera::create([
+                    'horario_id' => $horario->id,
+                    'carrera_id' => $carrera
+                ]);
+            }
+        }
 
         if($horario){
-            foreach ($this->dias as $dia) {
+            // foreach ($this->dias as $dia) {
                 $fecha = Carbon::now('America/Tegucigalpa')->format('Y-m-d');
                 $fecha = $startDate->copy(); // Reiniciar la fecha para cada día
                 $fecha->subDay()->format('Y-m-d');
@@ -148,7 +183,7 @@ class Crear extends Component
 
                 while ($fecha->lte($endDate)) {
 
-                    $fecha->next($dia);
+                    $fecha->next($this->dias);
 
                     if ($fecha->lte($endDate)) {
                         Asistencia::create([
@@ -160,7 +195,7 @@ class Crear extends Component
                             'aula_id' => $this->aula_id,
                             'tipo_aula_id' => $this->tipo_aula_id,
                             // 'docente_id' => $this->docente_id,
-                            'clase_id' => $this->clase_id,
+                            'clase_id' => $clase->id,
                             'periodo_id' => $this->periodo_id,
                             'usuario_id' => $user->id,
                             'estado_id' => 1,
@@ -174,7 +209,7 @@ class Crear extends Component
                     }
                 }
 
-            }
+            // }
             toastr()->success('Horarios registrados con éxito', 'Éxito', ['timeOut' => 5000]);
             $this->clean();
         }
@@ -195,8 +230,9 @@ class Crear extends Component
 
                             });
                   });
-        })->where('aula_id', $this->aula_id)->get();
+        })->where('aula_id', $this->aula_id)->orWhere('docente_id', $this->docente_id)->get();
 
+        // dd($horariosExistentes);
         return $horariosExistentes->isEmpty();
     }
 

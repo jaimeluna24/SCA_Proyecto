@@ -71,7 +71,10 @@
                         @forelse ($solicitudes as $item)
                             <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td class="px-6 py-4">{{ $item->id }}</td>
-                                <td class="px-6 py-4">{{ $item->aula->nombre }} - {{ $item->tipo_aula->tipo }}</td>
+                                <td class="px-6 py-4">
+                                    {{ $item->aula ? $item->aula->nombre : 'Sin asignar' }} -
+                                    {{ $item->tipo_aula->tipo}}
+                                </td>
                                 <td class="px-6 py-4">{{ $item->fecha }}</td>
 
                                 <td class="px-6 py-4">{{ $item->hora_inicio }} - {{ $item->hora_final }}</td>

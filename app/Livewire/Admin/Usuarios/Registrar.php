@@ -20,8 +20,6 @@ class Registrar extends Component
     {
         return [
             'name' => 'required|min:4|unique:users,name',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|min:8'
         ];
     }
 
@@ -31,8 +29,6 @@ class Registrar extends Component
             'name.required' => 'El usuarios es requerido.',
             'name.unique' => 'El usuario ya esta en uso',
             'name.min' => 'El usuario debe tener minimo 8 caracteres.',
-            'password' => 'La contraseña debe tener minimo 8 caracteres',
-            'email.unique' => 'El email ya esta en uso',
         ];
     }
 
@@ -61,7 +57,7 @@ class Registrar extends Component
                 $usuario->apellido = $this->apellido;
                 $usuario->name = $this->name;
                 $usuario->email = $this->email;
-                $usuario->password = Hash::make($this->password);
+                $usuario->password = Hash::make(12345678);
                 $usuario->empleado_id = $empleado->id;
 
                 $usuario->save();

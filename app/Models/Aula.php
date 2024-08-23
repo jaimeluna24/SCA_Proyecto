@@ -28,4 +28,9 @@ class Aula extends ModelBase
     {
         return $this->belongsTo(EstadoAula::class, 'estado_id');
     }
+
+    public function asistencias()
+    {
+        return $this->hasMany(Asistencia::class, 'aula_id');
+    }
 }

@@ -35,9 +35,9 @@
                 <div class="errors">@error('telefono') {{ $message }} @enderror</div>
             </div>
             <div class="relative z-0 mb-5">
-                <label for="underline_select" class="sr-only">Underline select</label>
+                <label for="underline_select" class="sr-only">Estadi civil</label>
                 <select wire:model="estado_civil" id="underline_select" class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-white dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                    <option class="dark:text-black" selected>Seleccione el sexo</option>
+                    <option class="dark:text-black" selected>Estado civil</option>
                     <option class="dark:text-black" value="Casado">Casado</option>
                     <option class="dark:text-black" value="Soltero">Soltero</option>
                 </select>

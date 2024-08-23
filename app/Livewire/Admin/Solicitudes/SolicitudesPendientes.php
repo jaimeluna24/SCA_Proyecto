@@ -19,6 +19,8 @@ class SolicitudesPendientes extends Component
 {
     use WithoutUrlPagination;
 
+    public $aulas_disponibles = [];
+
     public $query = '';
     public $estado_id = 0;
     public $fecha = null;
@@ -38,6 +40,7 @@ class SolicitudesPendientes extends Component
     public $encargado;
 
     public $docenteId;
+    public $aula_id;
 
 
     public function mount()
@@ -87,7 +90,7 @@ class SolicitudesPendientes extends Component
     public function detallesSoli($id)
     {
         $solicitud = Solicitud::findOrFail($id);
-        $aula = Aula::findOrFail($solicitud->aula_id);
+        // $aula = Aula::findOrFail($solicitud->aula_id);
         $estado = EstadoSolicitud::findOrFail($solicitud->estado_id);
         $tipo = TipoAula::findOrFail($solicitud->tipo_aula_id);
         $encargado = User::findOrFail($solicitud->created_by);
@@ -98,7 +101,7 @@ class SolicitudesPendientes extends Component
         $this->hora_final = $solicitud->hora_final;
         $this->descripcion = $solicitud->descripcion;
         $this->estado = $estado->estado;
-        $this->aula = $aula->nombre;
+        // $this->aula = $aula->nombre;
         $this->tipo_aula = $tipo->tipo;
         $this->link = $solicitud->link;
         $this->encargado = $encargado->nombre. ' ' .$encargado->apellido;
@@ -107,6 +110,22 @@ class SolicitudesPendientes extends Component
             $this->requerir_link = true;
         }
         $this->detalles = true;
+
+
+        // Obtener aulas disponibles para el horario especificado
+    // Obtener aulas disponibles para el horario especificado utilizando Eloquent ORM
+    $this->aulas_disponibles = Aula::whereDoesntHave('asistencias', function ($query) use ($solicitud) {
+        $query->where('fecha', $solicitud->fecha)
+              ->where(function ($query) use ($solicitud) {
+                  $query->whereBetween('hora_inicio', [$solicitud->hora_inicio, $solicitud->hora_final])
+                        ->orWhereBetween('hora_fin', [$solicitud->hora_inicio, $solicitud->hora_final])
+                        ->orWhere(function ($query) use ($solicitud) {
+                            $query->where('hora_inicio', '<=', $solicitud->hora_inicio)
+                                  ->where('hora_fin', '>=', $solicitud->hora_final);
+                        });
+              });
+    })->get();
+        // dd($this->aulas_disponibles);
     }
 
     public function aprobar()
@@ -137,6 +156,7 @@ class SolicitudesPendientes extends Component
             if($this->observacion){
                 $solicitud->update([
                     'observacion' => $this->observacion,
+                    'aula_id' => $this->aula_id,
                     'estado_id' => 2,
                 ]);
                 // return redirect(route('solicitudes-pendientes'));

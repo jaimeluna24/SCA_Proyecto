@@ -69,8 +69,8 @@
                 </div>
 
             </div>
-            <div class="grid md:grid-cols-4 md:gap-6 md:mb-6">
-                <div class="mb-3">
+            <div class="grid md:grid-cols-3 md:gap-6 md:mb-6">
+                {{-- <div class="mb-3">
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione el aula</label>
                     <select wire:model="aula" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                       <option selected>Seleccione</option>
@@ -82,7 +82,7 @@
                     @if ($error)
                         <div class="errors">Aula no encontrada</div>
                     @endif
-                </div>
+                </div> --}}
                 <div class="mb-3">
                     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Aula</label>
                     <select wire:model.live="tipo_aula" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

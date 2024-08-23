@@ -22,9 +22,14 @@
         </div>
         <div class="grid md:grid-cols-3 md:gap-6 md:mb-4">
             <div class="w-full mb-3">
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Aula</label>
-                    <input wire:model="aula" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled />
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asignar aula</label>
+                <select wire:model="aula_id" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>Seleccione</option>
+                  @foreach ($aulas_disponibles as $item)
+                  <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                  @endforeach
+
+                </select>
             </div>
             <div class="w-full mb-3">
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

@@ -91,9 +91,9 @@ class Docentes extends Component
         return [
             'nombre' => 'required',
             'apellido' => 'required',
-            'identidad' => ['required', 'regex:/^\d{4}-\d{4}-\d{5}$/', 'unique:docentes,identidad'],
-            'email' => 'required|unique:docentes,email',
-            'telefono' => ['required', 'regex:/^\d{4}-\d{4}$/', 'unique:docentes,telefono'],
+            'identidad' => ['required', 'regex:/^\d{4}-\d{4}-\d{5}$/'],
+            'email' => 'required',
+            'telefono' => ['required', 'regex:/^\d{4}-\d{4}$/'],
             'fecha_nacimiento' => 'before:today',
             'sede_id' => 'required'
         ];
@@ -102,10 +102,7 @@ class Docentes extends Component
     public function messages()
     {
         return [
-            'identidad.unique' => 'La identidad pertenece a otro docente.',
             'identidad.regex' => 'Formato esperado: "0000-0000-00000"',
-            'email.unique' => 'El email ya esta en uso',
-            'telefono.unique' => 'El telefono ya pertenece a un empleado',
             'telefono.regex' => 'Formato esperado: "1234-5678"',
             'fecha_nacimiento.before' => 'La fecha debe ser menor a la actual',
             'sede_id' => 'Campo requerido'

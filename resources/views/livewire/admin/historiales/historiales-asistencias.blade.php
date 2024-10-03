@@ -186,14 +186,14 @@
                     <tbody>
                         @forelse ($asistencias as $item)
                             <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td class="px-6 py-4">{{ $item->horario->clase->asignatura }}</td>
+                                <td class="px-6 py-4">{{ $item->clase->asignatura }}</td>
                                 <td class="px-6 py-4">{{ $item->fecha }}</td>
-                                <td class="px-6 py-4">{{ $item->horario->hora_inicio }}</td>
+                                <td class="px-6 py-4">{{ $item->hora_inicio }}</td>
 
-                                <td class="px-6 py-4">{{ $item->horario->aula->nombre }}</td>
-                                <td class="px-6 py-4">{{ $item->horario->tipo_aula->tipo }}</td>
-                                <td class="px-6 py-4">{{ $item->horario->docente->nombre }}
-                                    {{ $item->horario->docente->apellido }}</td>
+                                <td class="px-6 py-4">{{ $item->aula->nombre }}</td>
+                                <td class="px-6 py-4">{{ $item->tipo_aula->tipo }}</td>
+                                <td class="px-6 py-4">{{ $item->docente->nombre }}
+                                    {{ $item->docente->apellido }}</td>
 
                                 <td class="px-3 py-2">
                                     @if ($item->estado_id == 1)
@@ -271,14 +271,14 @@
                             <div class="flex items-center space-x-4 rtl:space-x-reverse">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                        {{ $item->horario->docente->nombre }} {{ $item->horario->docente->apellido }}
+                                        {{ $item->docente->nombre }} {{ $item->docente->apellido }}
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                        {{ $item->horario->clase->asignatura }}
+                                        {{ $item->clase->asignatura }}
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                        {{ $item->horario->aula->nombre }} - {{ $item->horario->hora_inicio }} -
-                                        {{ $item->horario->tipo_aula->tipo }}
+                                        {{ $item->aula->nombre }} - {{ $item->hora_inicio }} -
+                                        {{ $item->tipo_aula->tipo }}
                                     </p>
                                 </div>
                                 <div

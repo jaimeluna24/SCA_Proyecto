@@ -1,24 +1,44 @@
 <div>
     @if ($deshabilitar)
-        <div
-            class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-                Usuario: {{ $username }}
-            </h5>
-            <p class="text-sm font-normal text-gray-500 dark:text-gray-400"> ¿Estás seguro de eliminar al usuario
-                {{ $username }}?</p>
-            <p class="text-sm font-normal text-gray-500 dark:text-gray-400"> Se perderan todos los registros adjuntos al
-                usuario</p>
+    <div
+    class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+        Usuario: {{ $username }}
+    </h5>
+    <p class="text-sm font-normal text-gray-500 dark:text-gray-400"> ¿Estás seguro de eliminar al usuario
+        {{ $username }}?</p>
+    <p class="text-sm font-normal text-gray-500 dark:text-gray-400"> Se perderan todos los registros adjuntos al
+        usuario</p>
 
 
-            <div class="flex mt-7">
-                <button wire:click="eliminarUsuario()" type="button"
-                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
+    <div class="flex mt-7">
+        <button wire:click="eliminarUsuario()" type="button"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
 
-                <button wire:click="modeList()" type="button"
-                    class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancelar</button>
-            </div>
-        </div>
+        <button wire:click="modeList()" type="button"
+            class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancelar</button>
+    </div>
+    </div>
+    @elseif ($modeChangePassword)
+    <div
+    class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+    <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+        Reestablecer contraseña predeterminada Usuario: {{ $username }}
+    </h5>
+    <p class="text-sm font-normal text-gray-500 dark:text-gray-400"> ¿Estás seguro de restablecer la contraseña del usuario
+        {{ $username }}?</p>
+    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Contraseña predeterminada: <span class="font-bold">12345678</span></p>
+
+
+    <div class="flex mt-7">
+        <button wire:click="changePassword()" type="button"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reestablecer</button>
+
+        <button wire:click="modeList()" type="button"
+            class="text-white bg-gray-600 border border-gray-300 focus:outline-none hover:bg-gray-500 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Cancelar</button>
+    </div>
+    </div>
+
     @elseif ($changeRole)
         <div
             class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
@@ -161,6 +181,13 @@
                                 <button
                                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                                     wire:click="modeDeshabilitar({{ $item->id }})">Eliminar</button>
+
+                                    <button  wire:click="modePassword({{ $item->id }})"
+                                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+                                   >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32"><path fill="#ffffff" d="M21 2a8.998 8.998 0 0 0-8.612 11.612L2 24v6h6l10.388-10.388A9 9 0 1 0 21 2m0 16a7 7 0 0 1-2.032-.302l-1.147-.348l-.847.847l-3.181 3.181L12.414 20L11 21.414l1.379 1.379l-1.586 1.586L9.414 23L8 24.414l1.379 1.379L7.172 28H4v-3.172l9.802-9.802l.848-.847l-.348-1.147A7 7 0 1 1 21 18"/><circle cx="22" cy="10" r="2" fill="#ffffff"/></svg>
+                                </button>
+
                             </td>
 
                         </tr>
@@ -220,6 +247,5 @@
             </table>
         </div>
     @endif
-
 
 </div>

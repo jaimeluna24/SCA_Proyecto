@@ -287,7 +287,7 @@
                     <a href="/usuarios" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Lista de Usuarios</a>
                  </li>
                  <li>
-                    <a href="{{ route('usuarios-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registrar Usuario</a>
+                    <a href="{{ route('usuarios-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registro de Usuario</a>
                  </li>
             </ul>
           </li>
@@ -306,7 +306,7 @@
                     <a href="{{ route('docentes') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Lista de Docentes</a>
                  </li>
                  <li>
-                    <a href="{{ route('docentes-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registrar Docente</a>
+                    <a href="{{ route('docentes-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registro de Docente</a>
                  </li>
 
             </ul>
@@ -326,7 +326,7 @@
                     <a href="{{ route('empleados') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Lista de Empleados</a>
                  </li>
                  <li>
-                    <a href="{{ route('empleados-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registrar Empleado</a>
+                    <a href="{{ route('empleados-registrar') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Registro de Empleado</a>
                  </li>
 
             </ul>
@@ -391,8 +391,9 @@
 
 
 
+
       <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 <script>
     var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');

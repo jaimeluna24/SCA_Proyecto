@@ -76,5 +76,11 @@ class AulaSeeder extends Seeder
             'estado_id' => 1
         ]);
 
+        Aula::create([
+            'nombre' => 'Aula Virtual',
+            'capacidad' => '40',
+            'observacion' => 'Aula creada para clases en línea',
+            'estado_id' => 1
+        ]);
     }
 }

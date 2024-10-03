@@ -7,6 +7,7 @@ use App\Models\User;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class Usuarios extends Component
 {
@@ -22,6 +23,7 @@ class Usuarios extends Component
     public $rolActual;
     public $estado;
     public $modeChangeEstado = false;
+    public $modeChangePassword = false;
 
 
     public function render()
@@ -42,6 +44,7 @@ class Usuarios extends Component
         $this->deshabilitar = false;
         $this->changeRole = false;
         $this->modeChangeEstado = false;
+        $this->modeChangePassword = false;
     }
 
     public function eliminarUsuario(){
@@ -91,6 +94,22 @@ class Usuarios extends Component
             toastr()->warning('Usuario activado exitosamente', 'Éxito', ['timeOut' => 5000]);
 
         }
+    }
+
+    public function modePassword($id)
+    {
+        $this->user = User::find($id);
+        $this->username = $this->user->name;
+        $this->modeChangePassword = true;
+         // Actualizar la contraseña
+
+    }
+
+    public function changePassword(){
+        $this->user->password = Hash::make(12345678);
+        $this->user->save();
+        $this->modeChangePassword = false;
+        toastr()->success('Contraseña reestablecida exitosamente', 'Éxito', ['timeOut' => 5000]);
     }
 
 

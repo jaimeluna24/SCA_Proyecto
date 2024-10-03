@@ -231,7 +231,7 @@
             </div>
         </div>
         <div class="grid md:grid-cols-2 md:gap-6 mb-4">
-            @if ($tipo_aula_id == 1)
+            @if ($tipo_aula_id != 3)
                 <div>
                     <label for="message"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>

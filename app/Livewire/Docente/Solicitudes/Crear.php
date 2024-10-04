@@ -13,6 +13,8 @@ use App\Models\Asistencia;
 use App\Models\Docente;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Carrera;
+use App\Models\Clase;
+
 
 class Crear extends Component
 {
@@ -47,7 +49,7 @@ class Crear extends Component
         }
 
         $carreras = Carrera::all();
-        $clases = Carrera::find($this->carrera_id)->clases ?? collect([]);
+        $clases = Clase::all();
 
         $aulas = Aula::all();
         $estados = EstadoSolicitud::all();

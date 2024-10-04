@@ -1,6 +1,6 @@
 @extends('layout.app5')
 @section('title')
-<title>Registrar Horarios</title>
+<title>Registro de Horarios</title>
 @stop
 @section('header')
 <a href="/horarios" type="button" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
@@ -9,7 +9,7 @@
     </svg>
     <span class="sr-only">Icon description</span>
 </a>
-<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Registrar de Horarios</span>
+<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Registro de Horarios</span>
 @stop
 
 @section('breadcrumb')

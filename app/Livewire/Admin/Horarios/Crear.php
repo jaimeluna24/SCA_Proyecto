@@ -121,10 +121,6 @@ class Crear extends Component
             'periodo_id' => 'required',
             'dias' => 'required'
         ]);
-        // if($clase){
-        //     dd($clase);
-        // }
-        // dd('nada');
 
         $user = Auth::user();
         $dias_espanol = '';
@@ -150,8 +146,15 @@ class Crear extends Component
         $horario->periodo_id = $this->periodo_id;
         $horario->usuario_id = $user->id;
 
-        if (!$this->validarHorario($horario)) {
-            toastr()->error('El aula o decente no esta disponible para ese horario', 'Error', ['timeOut' => 5000]);
+        if (!$this->validarHorarioClases($horario)) {
+            toastr()->error('El docente tiene clases asignadas en ese horario para ese día', 'Error', ['timeOut' => 5000]);
+
+            // $this->addError('horario', 'Este horario coincide con otro existente.');
+            return;
+        }
+
+        if (!$this->validarHorarioAulas($horario)) {
+            toastr()->error('El aula no esta disponible en ese horario para ese día', 'Error', ['timeOut' => 5000]);
 
             // $this->addError('horario', 'Este horario coincide con otro existente.');
             return;
@@ -208,8 +211,6 @@ class Crear extends Component
                         break;
                     }
                 }
-
-            // }
             toastr()->success('Horarios registrados con éxito', 'Éxito', ['timeOut' => 5000]);
             $this->clean();
         }
@@ -217,24 +218,44 @@ class Crear extends Component
 
     }
 
-    public function validarHorario(Horario $horario)
+    public function validarHorarioClases(Horario $horario)
     {
         $horariosExistentes = Horario::where(function ($query) use ($horario) {
-            $query->where('dias', 'like', '%'.$horario->dias.'%')
+            $query->where('docente_id', $horario->docente_id)
+                  ->where('dias', 'like', '%'.$horario->dias.'%')
                   ->where(function ($query) use ($horario) {
-                      $query->whereBetween('hora_inicio', [$horario->hora_inicio, $horario->hora_fin])
-                            ->orWhereBetween('hora_fin', [$horario->hora_inicio, $horario->hora_fin])
-                            ->orWhere(function ($query) use ($horario) {
-                                $query->where('hora_inicio', '<=', $horario->hora_inicio)
-                                      ->where('hora_fin', '>=', $horario->hora_fin);
-
-                            });
+                        $query->whereBetween('hora_inicio', [$horario->hora_inicio, $horario->hora_fin])
+                              ->orWhereBetween('hora_fin', [$horario->hora_inicio, $horario->hora_fin])
+                              ->orWhere(function ($query) use ($horario) {
+                                    $query->where('hora_inicio', '<=', $horario->hora_inicio)
+                                          ->where('hora_fin', '>=', $horario->hora_fin);
+                                });
                   });
-        })->where('aula_id', $this->aula_id)->orWhere('docente_id', $this->docente_id)->get();
+        })->get();
 
-        // dd($horariosExistentes);
+        //  dd($horariosExistentes);
         return $horariosExistentes->isEmpty();
     }
+
+    public function validarHorarioAulas(Horario $horario)
+    {
+        $horariosExistentes = Horario::where(function ($query) use ($horario) {
+            $query->where('aula_id', $horario->aula_id)
+                  ->where('dias', 'like', '%'.$horario->dias.'%')
+                  ->where(function ($query) use ($horario) {
+                        $query->whereBetween('hora_inicio', [$horario->hora_inicio, $horario->hora_fin])
+                              ->orWhereBetween('hora_fin', [$horario->hora_inicio, $horario->hora_fin])
+                              ->orWhere(function ($query) use ($horario) {
+                                    $query->where('hora_inicio', '<=', $horario->hora_inicio)
+                                          ->where('hora_fin', '>=', $horario->hora_fin);
+                                });
+                  });
+        })->get();
+
+        //  dd($horariosExistentes);
+        return $horariosExistentes->isEmpty();
+    }
+
 
 
 

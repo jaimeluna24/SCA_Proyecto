@@ -21,13 +21,6 @@
             <div class="w-full mb-3">
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione
                     una carrera</label>
-                {{-- <select wire:model.live="carrera_id" id="countries"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Seleccione</option>
-                    @foreach ($carreras as $item)
-                        <option value="{{ $item->id }}">{{ $item->carrera }}</option>
-                    @endforeach
-                </select> --}}
                 <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" class="inline-flex items-center px-6 py-2 text-sm font-medium text-center text-black bg-white  rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 w-full dark:text-white" type="button">Seleccione <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                   </svg></button>
@@ -36,18 +29,7 @@
 <!-- Dropdown menu -->
 
 <div id="dropdownSearch" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
-    {{-- <div class="p-3">
-      <label for="input-group-search" class="sr-only">Search</label>
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-        </svg>
-        </div>
-        <input wire:model="query" type="text" id="input-group-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar">
-      </div>
 
-    </div> --}}
     <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownSearchButton">
         @foreach ($carreras as $item)
       <li>
@@ -59,9 +41,6 @@
       @endforeach
     </ul>
 </div>
-{{-- @foreach ($carrerasSelected  as $item)
-    <p>{{ $item }}</p>
-@endforeach --}}
 
 
                 <div class="errors">
@@ -78,13 +57,6 @@
                         <option value="{{ $item->asignatura }}">{{ $item->asignatura }}</option>
                         @endforeach
                     </datalist>
-                    {{-- <select wire:model="clase_id" id="countries"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Seleccione</option>
-                    @foreach ($clases as $item)
-                        <option value="{{ $item->id }}">{{ $item->asignatura }}</option>
-                    @endforeach
-                </select> --}}
                 <div class="errors">
                     @error('clase_id')
                         {{ $message }}
@@ -133,7 +105,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Seleccione</option>
                     @foreach ($periodos as $item)
-                        <option value="{{ $item->id }}">{{ $item->nombre }} - {{ $item->identificador }}</option>
+                        <option value="{{ $item->id }}">{{ $item->nombre }} - {{ $item->identificador }} - {{ $item->anio }}</option>
                     @endforeach
                 </select>
                 <div class="errors">

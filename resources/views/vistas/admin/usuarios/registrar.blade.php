@@ -1,6 +1,6 @@
 @extends('layout.app5')
 @section('title')
-<title>Registrar Usuario</title>
+<title>Registro de Usuario</title>
 @stop
 
 @section('header')
@@ -10,7 +10,7 @@
     </svg>
     <span class="sr-only">Icon description</span>
 </a>
-<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Registrar de Usuario</span>
+<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Registro de Usuarios</span>
 @stop
 
 @section('breadcrumb')

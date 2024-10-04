@@ -10,7 +10,7 @@
                 <div class="mb-3">
                     <label for="first_name"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del Periodo</label>
-                    <input placeholder="Primer periodo 2024" wire:model="nombre" type="text" id="first_name"
+                    <input placeholder="Primer periodo" wire:model="nombre" type="text" id="first_name"
                         class="{{ $errors->has('nombre') ? ' border-red-600' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />
                     <div class="errors">
@@ -22,7 +22,7 @@
                 <div class="mb-3">
                     <label for="first_name"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Identificador</label>
-                    <input placeholder="IPAC 2024" wire:model="identificador" type="text" id="first_name"
+                    <input placeholder="IPAC" wire:model="identificador" type="text" id="first_name"
                         class="{{ $errors->has('identificador') ? ' border-red-600' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />
                     <div class="errors">
